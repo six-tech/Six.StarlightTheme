@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 
 import starlightThemeSix from 'starlight-theme-six'
-import { getFavIcons } from './config/head'
+import { getFavIcons } from './config/favicons'
 import { devServerFileWatcher } from './config/integrations/dev-server-file-watcher'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -70,16 +70,26 @@ export default defineConfig({
         },
         {
           label: 'Examples',
-          autogenerate: { directory: 'examples' },
+          items: [
+            { slug: 'examples/asides' },
+            { slug: 'examples/badges' },
+            { slug: 'examples/banner' },
+            { slug: 'examples/cards' },
+            { slug: 'examples/code-blocks' },
+            { slug: 'examples/file-tree' },
+            { slug: 'examples/markdown' },
+            { slug: 'examples/steps' },
+            { slug: 'examples/tabs' },
+          ],
         },
         {
           label: 'Six Components',
           items: [
-            { slug: 'six/hero-x', badge: 'New' },
-            { slug: 'six/youtube-x', badge: 'New' },
+            { slug: 'six/hero-x' },
+            { slug: 'six/youtube-x' },
             { slug: 'six/figma-x', badge: 'New' },
-            { slug: 'six/grid-x', badge: 'New' },
-            { slug: 'six/container-section-x', badge: 'New' },
+            { slug: 'six/grid-x' },
+            { slug: 'six/container-section-x' },
           ],
         },
       ],

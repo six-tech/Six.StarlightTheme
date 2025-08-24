@@ -1,11 +1,13 @@
 /**
  * Configuration for favicon, manifest, and other head elements
  */
-export function getFavIcons(): readonly {
+interface HeadElement {
   tag: 'title' | 'link' | 'style' | 'base' | 'meta' | 'script' | 'noscript' | 'template'
   attrs?: Record<string, string | boolean | undefined> | undefined
   content?: string | undefined
-}[] {
+}
+
+export function getFavIcons(): readonly HeadElement[] {
   return [
     // Favicon for modern browsers
     {
