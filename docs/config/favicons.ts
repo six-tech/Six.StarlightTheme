@@ -15,7 +15,7 @@ export function getFavIcons(): readonly HeadElement[] {
       attrs: {
         rel: 'icon',
         type: 'image/svg+xml',
-        href: 'favicon.svg',
+        href: '/Six.StarlightTheme/favicon.svg',
       },
     },
     {
@@ -24,7 +24,7 @@ export function getFavIcons(): readonly HeadElement[] {
         rel: 'icon',
         type: 'image/png',
         sizes: '192x192',
-        href: 'icon-192.png',
+        href: '/Six.StarlightTheme/icon-192.png',
       },
     },
     {
@@ -33,7 +33,7 @@ export function getFavIcons(): readonly HeadElement[] {
         rel: 'icon',
         type: 'image/png',
         sizes: '512x512',
-        href: 'icon-512.png',
+        href: '/Six.StarlightTheme/icon-512.png',
       },
     },
     {
@@ -42,7 +42,7 @@ export function getFavIcons(): readonly HeadElement[] {
         rel: 'icon',
         type: 'image/png',
         sizes: '64x64',
-        href: 'icon-64.png',
+        href: '/Six.StarlightTheme/icon-64.png',
       },
     },
     // Apple Touch Icon for iOS devices
@@ -51,7 +51,7 @@ export function getFavIcons(): readonly HeadElement[] {
       attrs: {
         rel: 'apple-touch-icon',
         sizes: '192x192',
-        href: 'icon-192.png',
+        href: '/Six.StarlightTheme/icon-192.png',
       },
     },
     // Web App Manifest
@@ -59,7 +59,7 @@ export function getFavIcons(): readonly HeadElement[] {
       tag: 'link',
       attrs: {
         rel: 'manifest',
-        href: 'manifest.json',
+        href: '/Six.StarlightTheme/manifest.json',
       },
     },
     // Theme color for mobile browsers
