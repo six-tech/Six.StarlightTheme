@@ -12,7 +12,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://starlight-theme-six.vercel.app/',
+  base: '/Six.StarlightTheme/',
+  site: 'https://six-tech.github.io',
 
   integrations: [
     devServerFileWatcher([
