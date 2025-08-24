@@ -1,0 +1,55 @@
+---
+title: Starlight Six
+description: Six - An Astro.js Starlight theme used for the six.technology documentation.
+head:
+  - tag: title
+content: starlight-theme-six
+editUrl: false
+template: splash
+---
+
+import {Card, CardGrid} from '@astrojs/starlight/components'
+import {ContainerSection, HeroX} from 'starlight-theme-six/components'
+import heroImage from '../../assets/six-banner-wide-1980-01.png'
+
+<HeroX 
+  height="400px"
+  image={{
+    background: heroImage,
+    alt: "Hero background image",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    contentPosition: "bottom-left"
+  }}
+  actions={[
+    {
+      text: "Get Started",
+      link: "/getting-started/"
+    },
+    {
+      text: "Browse Starlight",
+      link: "https://starlight.astro.build/",
+      variant: "minimal",
+      attrs: {
+        target: "_blank",
+        rel: "noopener noreferrer"
+      }
+    }
+  ]}
+/>
+
+<ContainerSection>
+
+    ## Next steps
+
+    <CardGrid>
+        <Card title="Install the plugin" icon="puzzle">
+            Check the [getting started guide](/getting-started/) for installation instructions.
+        </Card>
+        <Card title="Configure the plugin" icon="setting">
+            Edit your config in the `astro.config.mjs` file.
+        </Card>
+    </CardGrid>
+
+</ContainerSection>

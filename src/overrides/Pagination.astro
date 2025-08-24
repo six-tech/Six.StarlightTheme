@@ -1,0 +1,123 @@
+---
+const { pagination } = Astro.locals.starlightRoute
+const { prev, next } = pagination
+---
+
+<div class="pagination-links print:hidden">
+  {
+    prev && (
+      <a class="prev" href={prev.href} rel="prev">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+        <div class="pagination-content">
+          <span class="pagination-direction">Previous</span>
+          <span class="pagination-label">{prev.label}</span>
+        </div>
+      </a>
+    )
+  }
+  {
+    next && (
+      <a class="next" href={next.href} rel="next">
+        <div class="pagination-content">
+          <span class="pagination-direction">Next</span>
+          <span class="pagination-label">{next.label}</span>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </a>
+    )
+  }
+</div>
+
+<style>
+  .pagination-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
+    border-radius: var(--radius);
+
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.15s;
+    font-weight: 500;
+    padding: 1rem;
+    white-space: nowrap;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+  }
+
+  a:hover {
+    color: var(--accent-foreground);
+    background-color: var(--card);
+  }
+
+  .pagination-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+    padding: 0 1rem;
+  }
+
+  .pagination-direction {
+    font-size: 0.875rem;
+    line-height: 1rem;
+    color: var(--muted-foreground);
+    font-weight: 400;
+  }
+
+  .pagination-label {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    color: var(--accent-foreground);
+    font-weight: 500;
+  }
+
+  .next .pagination-content {
+    align-items: flex-end;
+  }
+
+  a > svg {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    display: block;
+    vertical-align: middle;
+  }
+
+  .next {
+    margin-left: auto;
+  }
+</style>

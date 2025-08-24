@@ -1,0 +1,386 @@
+---
+import { Image } from 'astro:assets'
+import LinkButton from '../components/LinkButton.astro'
+import ContainerSectionX from './ContainerSectionX.astro'
+import { PAGE_TITLE_ID } from '../constants'
+
+// Position presets for content overlay on background images
+type ContentPosition =
+  | 'top-left'
+  | 'top-center'
+  | 'top-right'
+  | 'middle-left'
+  | 'middle-center'
+  | 'middle-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right'
+
+interface ImageConfig {
+  file?: ImageMetadata
+  alt?: string
+  width?: number | string
+  height?: number | string
+}
+
+interface ImageConfigWithThemes {
+  dark?: ImageMetadata
+  light?: ImageMetadata
+  alt?: string
+  width?: number | string
+  height?: number | string
+}
+
+interface BackgroundImageConfig {
+  background?: ImageMetadata
+  backgroundLight?: ImageMetadata
+  backgroundDark?: ImageMetadata
+  backgroundMobile?: ImageMetadata
+  backgroundMobileLight?: ImageMetadata
+  backgroundMobileDark?: ImageMetadata
+  alt?: string
+  backgroundSize?: string
+  backgroundPosition?: string
+  backgroundRepeat?: string
+  contentPosition?: ContentPosition
+}
+
+interface HtmlImageConfig {
+  html?: string
+}
+
+interface ActionConfig {
+  text: string
+  link: string
+  variant?: 'primary' | 'minimal'
+  attrs?: Record<string, any>
+  icon?: { html?: string }
+}
+
+interface Props {
+  title?: string
+  tagline?: string
+  titleColor?: string
+  taglineColor?: string
+  gap?: number | string
+  height?: number | string
+  px?: number | string
+  py?: number | string
+  image?: ImageConfig | ImageConfigWithThemes | BackgroundImageConfig | HtmlImageConfig
+  actions?: ActionConfig[]
+}
+
+const {
+  image,
+  actions = [],
+  height,
+  px,
+  py,
+  gap,
+  title: customTitle,
+  tagline: customTagline,
+  titleColor,
+  taglineColor,
+} = Astro.props
+
+// Use custom title/tagline if provided, otherwise fallback to frontmatter
+const { data } = Astro.locals.starlightRoute.entry
+const title = customTitle || data.title
+const tagline = customTagline || data.description
+
+// Build image attributes with custom dimensions support
+// Handle both number and string values for width/height
+const getImageDimension = (value: number | string | undefined, defaultValue: number) => {
+  if (value === undefined) return defaultValue
+  if (typeof value === 'string') return value
+  return value
+}
+
+const imageAttrs = {
+  loading: 'eager' as const,
+  decoding: 'async' as const,
+  width: getImageDimension(image && 'width' in image ? image.width : undefined, 400),
+  height: getImageDimension(image && 'height' in image ? image.height : undefined, 400),
+  alt: (image && 'alt' in image && image.alt) || '',
+}
+
+let darkImage: ImageMetadata | undefined
+let lightImage: ImageMetadata | undefined
+let rawHtml: string | undefined
+let heroStyle = ''
+let contentPosition: ContentPosition = 'middle-center'
+let isBackgroundMode = false
+
+// Background image fallback logic
+let backgroundImages = {
+  fallback: '',
+  light: '',
+  dark: '',
+  mobileLight: '',
+  mobileDark: '',
+}
+
+if (image) {
+  if ('file' in image && image.file) {
+    darkImage = image.file
+  } else if ('dark' in image && image.dark) {
+    darkImage = image.dark
+    lightImage = image.light
+  } else if (
+    'background' in image &&
+    (image.background ||
+      image.backgroundLight ||
+      image.backgroundDark ||
+      image.backgroundMobile ||
+      image.backgroundMobileLight ||
+      image.backgroundMobileDark)
+  ) {
+    isBackgroundMode = true
+    contentPosition = image.contentPosition || 'middle-center'
+
+    // Build proper fallback hierarchy for background images
+    const fallback = image.background?.src || image.backgroundLight?.src || image.backgroundDark?.src || ''
+    const light = image.backgroundLight?.src || image.background?.src || ''
+    const dark = image.backgroundDark?.src || image.background?.src || ''
+    const mobileLight =
+      image.backgroundMobileLight?.src ||
+      image.backgroundMobile?.src ||
+      image.backgroundLight?.src ||
+      image.background?.src ||
+      ''
+    const mobileDark =
+      image.backgroundMobileDark?.src ||
+      image.backgroundMobile?.src ||
+      image.backgroundDark?.src ||
+      image.background?.src ||
+      ''
+
+    backgroundImages = { fallback, light, dark, mobileLight, mobileDark }
+
+    // Build CSS styles for the hero container
+    const bgSize = image.backgroundSize || 'cover'
+    const bgPosition = image.backgroundPosition || 'center'
+    const bgRepeat = image.backgroundRepeat || 'no-repeat'
+    const containerHeight = height ? (typeof height === 'string' ? height : `${height}px`) : '60vh'
+
+    heroStyle = `background-image: url(${fallback}); background-size: ${bgSize}; background-position: ${bgPosition}; background-repeat: ${bgRepeat}; height: ${containerHeight};`
+
+    // Background image styles are now properly built
+  } else if ('html' in image && image.html) {
+    rawHtml = image.html
+  }
+}
+
+// Helper to convert padding values
+const getPaddingValue = (value: number | string | undefined, defaultValue: string) => {
+  if (value === undefined) return defaultValue
+  if (typeof value === 'string') return value
+  return `${value}px`
+}
+
+const horizontalPadding = getPaddingValue(px, '2rem')
+const verticalPadding = getPaddingValue(py, '2rem')
+const gapValue = getPaddingValue(gap, '0.25rem')
+
+// Helper function to get flexbox classes for positioning
+const getFlexboxClasses = (position: ContentPosition) => {
+  const [vertical, horizontal] = position.split('-')
+
+  const justifyContent = {
+    left: 'flex-start',
+    center: 'center',
+    right: 'flex-end',
+  }[horizontal]
+
+  const alignItems = {
+    top: 'flex-start',
+    middle: 'center',
+    bottom: 'flex-end',
+  }[vertical]
+
+  const textAlign = horizontal as 'left' | 'center' | 'right'
+
+  return { justifyContent, alignItems, textAlign }
+}
+
+const { justifyContent, alignItems, textAlign } = getFlexboxClasses(contentPosition)
+---
+
+<ContainerSectionX px={isBackgroundMode ? '0' : '1rem'} py={isBackgroundMode ? '0' : '1rem'}>
+  <div
+    class="six-hero"
+    class:list={{ 'six-hero-with-background': isBackgroundMode }}
+    style={isBackgroundMode ? heroStyle : ''}
+  >
+    {/* Background mode: Flexbox content positioning */}
+    {
+      isBackgroundMode && (
+        <div
+          class="six-hero-content-overlay"
+          style={`
+          justify-content: ${justifyContent};
+          align-items: ${alignItems};
+          text-align: ${textAlign};
+          padding: ${verticalPadding} ${horizontalPadding};
+        `}
+        >
+          <div class="six-hero-content-wrapper" style={`gap: ${gapValue};`}>
+            <div
+              class="six-hero-title"
+              id={PAGE_TITLE_ID}
+              data-page-title
+              set:html={title}
+              style={titleColor ? `color: ${titleColor};` : ''}
+            />
+            {tagline && (
+              <div class="six-hero-tagline" set:html={tagline} style={taglineColor ? `color: ${taglineColor};` : ''} />
+            )}
+            {actions.length > 0 && (
+              <div class="six-hero-actions">
+                {actions.map(({ attrs: { class: className, ...attrs } = {}, icon, link: href, text, variant }) => (
+                  <LinkButton {href} {variant} class:list={[className]} {...attrs}>
+                    {text}
+                    {icon?.html && <Fragment set:html={icon.html} />}
+                  </LinkButton>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )
+    }
+
+    {/* Regular mode: Standard content flow */}
+    {
+      !isBackgroundMode && (
+        <div class="six-hero-content" style={`gap: ${gapValue};`}>
+          {darkImage && <Image src={darkImage} {...imageAttrs} class:list={lightImage ? ['light:sl-hidden'] : []} />}
+          {lightImage && <Image src={lightImage} {...imageAttrs} class="dark:sl-hidden" />}
+          {rawHtml && <div class="six-hero-html sl-flex" set:html={rawHtml} />}
+          <div
+            class="six-hero-title"
+            id={PAGE_TITLE_ID}
+            data-page-title
+            set:html={title}
+            style={titleColor ? `color: ${titleColor};` : ''}
+          />
+          {tagline && (
+            <div class="six-hero-tagline" set:html={tagline} style={taglineColor ? `color: ${taglineColor};` : ''} />
+          )}
+          {actions.length > 0 && (
+            <div class="six-hero-actions">
+              {actions.map(({ attrs: { class: className, ...attrs } = {}, icon, link: href, text, variant }) => (
+                <LinkButton {href} {variant} class:list={[className]} {...attrs}>
+                  {text}
+                  {icon?.html && <Fragment set:html={icon.html} />}
+                </LinkButton>
+              ))}
+            </div>
+          )}
+        </div>
+      )
+    }
+  </div>
+</ContainerSectionX>
+
+<style>
+  .six-hero {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Regular mode: Standard content flow */
+  .six-hero-content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    /* gap is controlled by prop */
+  }
+
+  /* Background mode: Flexbox container for positioning */
+  .six-hero-with-background {
+    padding: 0; /* Remove padding for background mode */
+    position: relative;
+    overflow: hidden;
+    min-height: 400px; /* Fallback minimum height for vertical positioning */
+    display: flex;
+    /* Background image and height are set via inline style */
+  }
+
+  .six-hero-content-overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    flex: 1; /* Take full height of parent */
+  }
+
+  .six-hero-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* a prop controls gap */
+    max-width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .six-hero {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    .six-hero-content-overlay {
+      padding: 3rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .six-hero {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .six-hero-content-overlay {
+      padding: 2.5rem;
+    }
+  }
+
+  .six-hero-title {
+    color: var(--foreground-light);
+    letter-spacing: -0.05em;
+    font-weight: 800;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    margin: 0 !important;
+  }
+
+  @media (min-width: 1024px) {
+    .six-hero-title {
+      line-height: 1.1;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .six-hero-title {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  .six-hero-tagline {
+    color: var(--muted-foreground);
+    font-weight: 300;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    max-width: 42rem;
+    margin: 0 !important;
+  }
+
+  .six-hero-actions {
+    width: 100%;
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>

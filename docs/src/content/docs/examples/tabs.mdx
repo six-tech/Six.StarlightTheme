@@ -1,0 +1,341 @@
+---
+title: Tabs
+description: Learn how to use tab components to organize content into collapsible sections, making your documentation more scannable and organized.
+---
+
+# Introduction
+
+Tabs are interactive components that allow you to organize content into collapsible sections. They're perfect for displaying multiple code examples, configuration options, or related content without overwhelming the reader. The Six Starlight Theme provides a flexible tab system that supports icons, labels, and various content types.
+
+## Props
+
+### Tabs Component
+
+| Prop Name | Prop Type | Description |
+|-----------|-----------|-------------|
+| `children` | `TabItem[]` | Tab item components to display |
+| `defaultTab` | `string` | The label of the tab to show by default (optional) |
+
+### TabItem Component
+
+| Prop Name | Prop Type | Description |
+|-----------|-----------|-------------|
+| `label` | `string` | The text label displayed on the tab |
+| `icon` | `string` | Optional icon to display alongside the label |
+| `children` | `ReactNode` | The content to display when this tab is active |
+
+# Basic Tabs
+----
+
+The simplest form of tabs with text labels and basic content.
+
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
+## Simple Tabs
+
+````jsx
+<Tabs>
+  <TabItem label="Overview">
+    This tab provides an overview of the topic. It's perfect for introducing concepts and giving readers a high-level understanding before diving into details.
+  </TabItem>
+  <TabItem label="Details">
+    This tab contains detailed information and examples. Use it for comprehensive explanations and step-by-step instructions.
+  </TabItem>
+  <TabItem label="Examples">
+    This tab showcases practical examples and use cases. It helps readers understand how to apply the concepts in real scenarios.
+  </TabItem>
+</Tabs>
+````
+
+<Tabs>
+  <TabItem label="Overview">
+    This tab provides an overview of the topic. It's perfect for introducing concepts and giving readers a high-level understanding before diving into details.
+  </TabItem>
+  <TabItem label="Details">
+    This tab contains detailed information and examples. Use it for comprehensive explanations and step-by-step instructions.
+  </TabItem>
+  <TabItem label="Examples">
+    This tab showcases practical examples and use cases. It helps readers understand how to apply the concepts in real scenarios.
+  </TabItem>
+</Tabs>
+
+# Tabs with Icons
+----
+
+Tabs can include icons to make them more visually appealing and easier to identify.
+
+## Package Manager Tabs
+
+````jsx
+<Tabs>
+  <TabItem label="npm" icon="seti:npm">
+    ```sh
+    npm install @six/starlight-theme
+    ```
+    
+    Use npm to install the Six Starlight Theme package. This is the most common package manager for Node.js projects.
+  </TabItem>
+
+  <TabItem label="pnpm" icon="pnpm">
+    ```sh
+    pnpm add @six/starlight-theme
+    ```
+    
+    Use pnpm for faster, more efficient package management. It's a great alternative to npm with better performance.
+  </TabItem>
+
+  <TabItem label="Yarn" icon="seti:yarn">
+    ```sh
+    yarn add @six/starlight-theme
+    ```
+    
+    Use Yarn for reliable package management with enhanced security features and deterministic installations.
+  </TabItem>
+</Tabs>
+````
+
+<Tabs>
+  <TabItem label="npm" icon="seti:npm">
+    ```sh
+    npm install @six/starlight-theme
+    ```
+    
+    Use npm to install the Six Starlight Theme package. This is the most common package manager for Node.js projects.
+  </TabItem>
+
+  <TabItem label="pnpm" icon="pnpm">
+    ```sh
+    pnpm add @six/starlight-theme
+    ```
+    
+    Use pnpm for faster, more efficient package management. It's a great alternative to npm with better performance.
+  </TabItem>
+
+  <TabItem label="Yarn" icon="seti:yarn">
+    ```sh
+    yarn add @six/starlight-theme
+    ```
+    
+    Use Yarn for reliable package management with enhanced security features and deterministic installations.
+  </TabItem>
+</Tabs>
+
+# Code Examples
+----
+
+Tabs are particularly useful for displaying different code examples or configuration options.
+
+## Language Examples
+
+````jsx
+<Tabs>
+  <TabItem label="JavaScript">
+    ```js
+    // JavaScript example
+    const theme = {
+      name: 'six-starlight',
+      version: '1.0.0'
+    };
+    
+    console.log('Theme loaded:', theme.name);
+    ```
+  </TabItem>
+  
+  <TabItem label="TypeScript">
+    ```ts
+    // TypeScript example
+    interface Theme {
+      name: string;
+      version: string;
+    }
+    
+    const theme: Theme = {
+      name: 'six-starlight',
+      version: '1.0.0'
+    };
+    
+    console.log('Theme loaded:', theme.name);
+    ```
+  </TabItem>
+  
+  <TabItem label="JSON">
+    ```json
+    {
+      "theme": {
+        "name": "six-starlight",
+        "version": "1.0.0"
+      }
+    }
+    ```
+  </TabItem>
+</Tabs>
+````
+
+<Tabs>
+  <TabItem label="JavaScript">
+    ```js
+    // JavaScript example
+    const theme = {
+      name: 'six-starlight',
+      version: '1.0.0'
+    };
+    
+    console.log('Theme loaded:', theme.name);
+    ```
+  </TabItem>
+  
+  <TabItem label="TypeScript">
+    ```ts
+    // TypeScript example
+    interface Theme {
+      name: string;
+      version: string;
+    }
+    
+    const theme: Theme = {
+      name: 'six-starlight',
+      version: '1.0.0'
+    };
+    
+    console.log('Theme loaded:', theme.name);
+    ```
+  </TabItem>
+  
+  <TabItem label="JSON">
+    ```json
+    {
+      "theme": {
+        "name": "six-starlight",
+        "version": "1.0.0"
+      }
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+# Mixed Content Tabs
+----
+
+Tabs can contain various types of content including text, code blocks, tables, and other components.
+
+## Configuration Tabs
+
+````jsx
+<Tabs>
+  <TabItem label="Configuration">
+    **Basic Configuration:**
+    
+    ```js
+    export default {
+      theme: 'six-starlight',
+      // other options...
+    }
+    ```
+    
+    This tab shows how to configure the theme with basic settings.
+  </TabItem>
+  
+  <TabItem label="Customization">
+    **Custom Properties:**
+    
+    | Property | Type | Default | Description |
+    |----------|------|---------|-------------|
+    | `primaryColor` | `string` | `#0066cc` | Main brand color |
+    | `fontFamily` | `string` | `system-ui` | Font family |
+    | `borderRadius` | `string` | `8px` | Border radius |
+    
+    Customize the theme appearance using CSS custom properties.
+  </TabItem>
+  
+  <TabItem label="Advanced">
+    **Advanced Usage:**
+    
+    :::tip
+    For advanced customization, you can extend the theme's CSS variables or create custom components.
+    :::
+    
+    This tab covers advanced techniques and best practices.
+  </TabItem>
+</Tabs>
+````
+
+<Tabs>
+  <TabItem label="Configuration">
+    **Basic Configuration:**
+    
+    ```js
+    export default {
+      theme: 'six-starlight',
+      // other options...
+    }
+    ```
+    
+    This tab shows how to configure the theme with basic settings.
+  </TabItem>
+  
+  <TabItem label="Customization">
+    **Custom Properties:**
+    
+    | Property | Type | Default | Description |
+    |----------|------|---------|-------------|
+    | `primaryColor` | `string` | `#0066cc` | Main brand color |
+    | `fontFamily` | `string` | `system-ui` | Font family |
+    | `borderRadius` | `string` | `8px` | Border radius |
+    
+    Customize the theme appearance using CSS custom properties.
+  </TabItem>
+  
+  <TabItem label="Advanced">
+    **Advanced Usage:**
+    
+    :::tip
+    For advanced customization, you can extend the theme's CSS variables or create custom components.
+    :::
+    
+    This tab covers advanced techniques and best practices.
+  </TabItem>
+</Tabs>
+
+# Advanced Usage
+----
+
+## Default Tab Selection
+
+You can specify which tab should be open by default using the `defaultTab` prop.
+
+## Icon Support
+
+The icon system supports various icon sets including:
+- **seti**: Seti UI icons
+- **mdi**: Material Design Icons
+- **tabler**: Tabler Icons
+- **lucide**: Lucide Icons
+- Custom icon sets
+
+## Responsive Behavior
+
+Tabs automatically adapt to different screen sizes:
+- **Desktop**: Full tab layout with horizontal tabs
+- **Mobile**: Compact layout with optimized touch targets
+
+# Best Practices
+----
+
+- Use tabs to organize related content logically
+- Keep tab labels concise and descriptive
+- Use icons consistently across similar tab groups
+- Limit the number of tabs to 5-7 for optimal usability
+- Ensure each tab has meaningful, distinct content
+- Use tabs for content that's truly alternative, not sequential
+- Test tab functionality on different devices and screen sizes
+
+# What to Avoid
+----
+
+- **Don't use tabs for sequential content** - Use steps or numbered lists instead
+- **Don't create too many tabs** - This can overwhelm users and reduce usability
+- **Don't use tabs for navigation** - Use proper navigation components instead
+- **Don't hide essential information in tabs** - Critical content should be visible by default
+- **Don't use tabs without clear purpose** - Each tab should serve a specific function
+- **Don't create deeply nested tab structures** - Keep the hierarchy simple and intuitive
+- **Don't use tabs for content that should be visible simultaneously** - Tabs hide content by design

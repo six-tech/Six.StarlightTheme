@@ -1,0 +1,278 @@
+---
+title: YouTubeX
+description: Learn how to use the YouTubeX component to embed YouTube videos with responsive sizing and flexible width options.
+---
+
+import YouTubeX from '@six-theme/components-x/YouTubeX.astro';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { GridX } from 'starlight-theme-six/components';
+
+# Introduction
+
+The YouTubeX component provides an easy way to embed YouTube videos in your documentation with responsive sizing and aspect ratio preservation. It automatically maintains a 16:9 aspect ratio while offering flexible width options and mobile-friendly responsive adjustments.
+
+----
+
+## Props
+
+| Prop Name | Prop Type | Description | Default |
+|-----------|-----------|-------------|---------|
+| `url` | `string` | The YouTube embed URL (required) | - |
+| `size` | `string \| number \| 'full'` | Width control for the video player | `'full'` |
+
+----
+
+# Basic Usage
+
+The simplest way to embed a YouTube video is to provide the embed URL.
+
+## Getting the Embed URL
+
+To get the proper embed URL from YouTube:
+
+1. Go to the YouTube video
+2. Click "Share" 
+3. Click "Embed"
+4. Copy the URL from the `src` attribute of the iframe
+
+The URL should be in the format: `https://www.youtube.com/embed/VIDEO_ID`
+
+## Simple Embed
+
+``` astro
+<YouTubeX url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+```
+
+<YouTubeX url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+
+----
+
+# Size Options
+
+The YouTubeX component supports various sizing options while maintaining the 16:9 aspect ratio.
+
+## Pixel Width
+
+Specify exact width in pixels:
+
+``` astro
+<YouTubeX size="560" url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+```
+
+<YouTubeX size="560" url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+
+## Pixel Width with Units
+
+You can also specify pixels explicitly:
+
+``` astro
+<YouTubeX size="480px" url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+```
+
+<YouTubeX size="480px" url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+
+## Percentage Width
+
+Use percentage for responsive behavior:
+
+``` astro
+<YouTubeX size="75%" url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+```
+
+<YouTubeX size="75%" url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+
+## Full Width
+
+Use full container width:
+
+``` astro
+<YouTubeX size="full" url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+```
+
+<YouTubeX size="full" url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+
+----
+
+# Layout Examples
+
+## Side-by-Side Videos
+
+Compare multiple videos using the GridX component:
+
+``` astro
+<GridX cols={2} gap="1rem">
+  <YouTubeX slot="col1" url="https://www.youtube.com/embed/video-id-1" />
+  <YouTubeX slot="col2" url="https://www.youtube.com/embed/video-id-2" />
+</GridX>
+```
+
+<GridX cols={2} gap="1rem">
+  <YouTubeX slot="col1" url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+  <YouTubeX slot="col2" url="https://www.youtube.com/embed/dQw4w9WgXcQ" />
+</GridX>
+
+## Centered Video
+
+Center a video with custom width:
+
+``` astro
+<div style="display: flex; justify-content: center;">
+  <YouTubeX url="https://www.youtube.com/embed/your-video-id" size="480" />
+</div>
+```
+
+<div style="display: flex; justify-content: center;">
+  <YouTubeX url="https://www.youtube.com/embed/dQw4w9WgXcQ" size="480" />
+</div>
+
+## Video Grid
+
+Create a grid of multiple videos:
+
+``` astro
+<GridX cols={4} gap="1rem">
+  <YouTubeX slot="col1" url="https://www.youtube.com/embed/video-1" />
+  <YouTubeX slot="col2" url="https://www.youtube.com/embed/video-2" />
+  <YouTubeX slot="col3" url="https://www.youtube.com/embed/video-3" />
+  <YouTubeX slot="col4" url="https://www.youtube.com/embed/video-4" />
+</GridX>
+```
+
+----
+
+# Advanced Usage
+
+## Tutorial Series
+
+Organize multiple tutorial videos:
+
+``` astro
+## Part 1: Getting Started
+<YouTubeX url="https://www.youtube.com/embed/tutorial-part-1" size="full" />
+
+## Part 2: Advanced Features  
+<YouTubeX url="https://www.youtube.com/embed/tutorial-part-2" size="full" />
+
+## Part 3: Best Practices
+<YouTubeX url="https://www.youtube.com/embed/tutorial-part-3" size="full" />
+```
+
+## Responsive Embed
+
+For maximum responsiveness, use percentage widths:
+
+``` astro
+<YouTubeX 
+  url="https://www.youtube.com/embed/your-video-id" 
+  size="100%" 
+/>
+```
+
+## Playlist Embedding
+
+Embed YouTube playlists by using the playlist URL:
+
+``` astro
+<YouTubeX url="https://www.youtube.com/embed/videoseries?list=YOUR_PLAYLIST_ID" />
+```
+
+----
+
+# Size Configuration
+
+## Available Size Options
+
+| Size Value | Result | Use Case |
+|------------|--------|----------|
+| `number` | Width in pixels | Fixed width layouts |
+| `"XXXpx"` | Width in pixels with units | Explicit pixel sizing |
+| `"XX%"` | Percentage of container | Responsive layouts |
+| `"full"` or `"100%"` | Full container width | Maximum responsive width |
+
+## Aspect Ratio
+
+The component automatically calculates height to maintain a 16:9 aspect ratio:
+
+- **560px width** → 315px height
+- **100% width** → 56.25% height (responsive)
+- **Custom width** → Proportional height
+
+----
+
+# Video Types
+
+## Standard Videos
+
+Embed regular YouTube videos:
+
+``` astro
+<YouTubeX url="https://www.youtube.com/embed/VIDEO_ID" />
+```
+
+## Live Streams
+
+Embed live streams (works the same way):
+
+``` astro
+<YouTubeX url="https://www.youtube.com/embed/LIVE_STREAM_ID" />
+```
+
+## YouTube Shorts
+
+Embed YouTube Shorts (may appear in standard player):
+
+``` astro
+<YouTubeX url="https://www.youtube.com/embed/SHORTS_ID" />
+```
+
+## Playlists
+
+Embed entire playlists:
+
+``` astro
+<YouTubeX url="https://www.youtube.com/embed/videoseries?list=PLAYLIST_ID" />
+```
+
+----
+
+# Accessibility Features
+
+The YouTubeX component includes several accessibility features:
+
+## Screen Reader Support
+
+- Proper `title` attribute for iframe identification
+- Descriptive iframe titles based on video content
+
+## Keyboard Navigation
+
+- Standard YouTube player keyboard controls
+- Tab navigation support for embedded player
+
+## Security Features
+
+- Secure iframe attributes for content security
+- `allowfullscreen` attribute for better user experience
+
+----
+
+# Best Practices
+
+- Use descriptive context around embedded videos to provide additional information
+- Choose appropriate sizing based on your content layout and design
+- Test video embeds on different screen sizes and devices
+- Consider loading performance when embedding multiple videos on one page
+- Use meaningful section headings when organizing multiple videos
+- Provide transcripts or captions when possible for accessibility
+
+----
+
+# What to Avoid
+
+- **Don't use regular YouTube URLs** - Always use the embed URL format
+- **Don't embed too many videos on one page** - This can impact page loading performance  
+- **Don't use extremely small sizes** - Videos become hard to watch and interact with
+- **Don't forget to test mobile experience** - Ensure videos work well on smaller screens
+- **Don't use videos as the only way to convey important information** - Provide alternative text-based content
+- **Don't embed private or unlisted videos without proper permissions** - Ensure videos are accessible to your audience
+- **Don't ignore aspect ratio** - The component maintains 16:9, but consider how this fits your design

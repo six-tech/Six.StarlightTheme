@@ -1,0 +1,345 @@
+---
+title: GridX
+description: Learn how to use the GridX component to create flexible, responsive grid layouts with named slots and customizable spacing.
+---
+
+import { GridX } from 'starlight-theme-six/components'
+
+# Introduction
+
+The GridX component is a flexible grid system that provides a simple way to create multi-column layouts using named slots. It supports up to 12 columns, automatically adapts to different screen sizes, and offers customizable spacing between columns and rows.
+
+----
+
+## Props
+
+| Prop Name | Prop Type | Description | Default |
+|-----------|-----------|-------------|---------|
+| `cols` | `number` | Number of columns per row (1-12) | `12` |
+| `gap` | `string` | General gap between columns and rows | `"1rem"` |
+| `hgap` | `string` | Horizontal gap between columns | `gap` value |
+| `vgap` | `string` | Vertical gap between rows | `gap` value |
+
+----
+
+# Basic Usage
+
+The GridX component uses named slots with the pattern `col{number}` where the number ranges from 1 to 12.
+
+## Two Column Layout
+
+``` astro
+<GridX cols={2}>
+  <div slot="col1">First column content</div>
+  <div slot="col2">Second column content</div>
+</GridX>
+```
+
+<GridX cols={2}>
+  <div slot="col1">
+    **Left Column**
+    
+    This content appears in the left column with automatic responsive behavior.
+  </div>
+  <div slot="col2">
+    **Right Column**
+    
+    This content appears in the right column and stacks below on mobile devices.
+  </div>
+</GridX>
+
+## Three Column Layout
+
+``` astro
+<GridX cols={3} gap="2rem">
+  <div slot="col1">First column</div>
+  <div slot="col2">Second column</div>
+  <div slot="col3">Third column</div>
+</GridX>
+```
+
+<GridX cols={3} gap="2rem">
+  <div slot="col1">
+    **Feature 1**
+    
+    Fast and efficient grid system
+  </div>
+  <div slot="col2">
+    **Feature 2**
+    
+    Responsive by default
+  </div>
+  <div slot="col3">
+    **Feature 3**
+    
+    Easy to customize
+  </div>
+</GridX>
+
+----
+
+# Column Variations
+
+## Four Column Grid
+
+Perfect for feature showcases or card layouts:
+
+``` astro
+<GridX cols={4} gap="1.5rem">
+  <div slot="col1">📊 **Analytics** - Track your metrics</div>
+  <div slot="col2">🚀 **Performance** - Optimized for speed</div>
+  <div slot="col3">🔒 **Security** - Built-in protection</div>
+  <div slot="col4">📱 **Mobile** - Responsive design</div>
+</GridX>
+```
+
+<GridX cols={4} gap="1.5rem">
+  <div slot="col1">📊 **Analytics** - Track your metrics</div>
+  <div slot="col2">🚀 **Performance** - Optimized for speed</div>
+  <div slot="col3">🔒 **Security** - Built-in protection</div>
+  <div slot="col4">📱 **Mobile** - Responsive design</div>
+</GridX>
+
+## Six Column Grid
+
+Ideal for process steps or detailed breakdowns:
+
+``` astro
+<GridX cols={6} gap="1rem">
+  <div slot="col1">**Step 1** - Initialize</div>
+  <div slot="col2">**Step 2** - Configure</div>
+  <div slot="col3">**Step 3** - Build</div>
+  <div slot="col4">**Step 4** - Test</div>
+  <div slot="col5">**Step 5** - Deploy</div>
+  <div slot="col6">**Step 6** - Monitor</div>
+</GridX>
+```
+
+<GridX cols={6} gap="1rem">
+  <div slot="col1">**Step 1** - Initialize</div>
+  <div slot="col2">**Step 2** - Configure</div>
+  <div slot="col3">**Step 3** - Build</div>
+  <div slot="col4">**Step 4** - Test</div>
+  <div slot="col5">**Step 5** - Deploy</div>
+  <div slot="col6">**Step 6** - Monitor</div>
+</GridX>
+
+----
+
+# Advanced Usage
+
+## Custom Gap Spacing
+
+Use different horizontal and vertical gaps for better visual hierarchy:
+
+``` astro
+<GridX cols={3} hgap="3rem" vgap="1rem">
+  <div slot="col1">Card 1 - More horizontal spacing</div>
+  <div slot="col2">Card 2 - Between columns</div>
+  <div slot="col3">Card 3 - Less vertical spacing when wrapped</div>
+</GridX>
+```
+
+<GridX cols={3} hgap="3rem" vgap="1rem">
+  <div slot="col1">**Card 1** - More horizontal spacing</div>
+  <div slot="col2">**Card 2** - Between columns</div>
+  <div slot="col3">**Card 3** - Less vertical spacing when wrapped</div>
+</GridX>
+
+## Wrapping Columns
+
+When you use more slots than `cols`, extra columns wrap to the next row:
+
+``` astro
+<GridX cols={3} gap="1rem">
+  <div slot="col1">Item 1</div>
+  <div slot="col2">Item 2</div>
+  <div slot="col3">Item 3</div>
+  <div slot="col4">Item 4 (wraps to new row)</div>
+  <div slot="col5">Item 5</div>
+  <div slot="col6">Item 6</div>
+</GridX>
+```
+
+<GridX cols={3} gap="1rem">
+  <div slot="col1">Item 1</div>
+  <div slot="col2">Item 2</div>
+  <div slot="col3">Item 3</div>
+  <div slot="col4">Item 4 (wraps to new row)</div>
+  <div slot="col5">Item 5</div>
+  <div slot="col6">Item 6</div>
+</GridX>
+
+## Skipping Columns
+
+You can skip columns by not defining certain slots:
+
+``` astro
+<GridX cols={4}>
+  <div slot="col1">First</div>
+  <!-- col2 is skipped -->
+  <div slot="col3">Third</div>
+  <div slot="col4">Fourth</div>
+</GridX>
+```
+
+<GridX cols={4}>
+  <div slot="col1">First</div>
+  <div slot="col3">Third (col2 skipped)</div>
+  <div slot="col4">Fourth</div>
+</GridX>
+
+## Nested Grids
+
+Create complex layouts by nesting GridX components:
+
+``` astro
+<GridX cols={2} gap="2rem">
+  <div slot="col1">
+    <GridX cols={2} gap="0.5rem">
+      <div slot="col1">1A</div>
+      <div slot="col2">1B</div>
+    </GridX>
+  </div>
+  <div slot="col2">
+    Main content area with nested grid on the left
+  </div>
+</GridX>
+```
+
+<GridX cols={2} gap="2rem">
+  <div slot="col1">
+    <GridX cols={2} gap="0.5rem">
+      <div slot="col1">1A</div>
+      <div slot="col2">1B</div>
+    </GridX>
+  </div>
+  <div slot="col2">
+    Main content area with nested grid on the left
+  </div>
+</GridX>
+
+----
+
+# Responsive Behavior
+
+The GridX component automatically adjusts based on screen size:
+
+## Breakpoint Behavior
+
+| Screen Size | Behavior |
+|-------------|----------|
+| **Mobile (< 768px)** | All columns stack vertically (1 column) |
+| **Tablet (768px - 1023px)** | Shows maximum of 2 columns per row |
+| **Small Desktop (1024px - 1279px)** | Shows maximum of 4 columns for grids with 7+ columns |
+| **Large Desktop (≥ 1280px)** | Shows all columns as configured |
+
+## Responsive Example
+
+``` astro
+<GridX cols={4}>
+  <!-- On mobile: 1 column (stacked) -->
+  <!-- On tablet: 2 columns per row -->
+  <!-- On desktop: 4 columns per row -->
+  <div slot="col1">Responsive Item 1</div>
+  <div slot="col2">Responsive Item 2</div>
+  <div slot="col3">Responsive Item 3</div>
+  <div slot="col4">Responsive Item 4</div>
+</GridX>
+```
+
+----
+
+# Slot Names
+
+The component uses named slots following the pattern `col{n}`:
+
+## Available Slots
+
+- `col1` through `col12` - Individual column slots
+- You can use any combination up to 12 slots
+- Unused slots are not rendered
+- Slots beyond the `cols` value wrap to new rows
+
+## Slot Usage Example
+
+``` astro
+<GridX cols={3}>
+  <div slot="col1">Column 1 content</div>
+  <div slot="col2">Column 2 content</div>
+  <div slot="col3">Column 3 content</div>
+  <!-- Additional slots wrap to next row -->
+  <div slot="col4">Column 4 content (new row)</div>
+</GridX>
+```
+
+----
+
+# Use Cases
+
+## Feature Grids
+
+Showcase product features or benefits:
+
+``` astro
+<GridX cols={3} gap="2rem">
+  <div slot="col1">🎯 **Targeted** - Precise control</div>
+  <div slot="col2">⚡ **Fast** - Optimized performance</div>
+  <div slot="col3">🔧 **Flexible** - Customizable options</div>
+</GridX>
+```
+
+## Card Layouts
+
+Create responsive card grids:
+
+``` astro
+<GridX cols={2} gap="1.5rem">
+  <div slot="col1">
+    **Card Title 1**
+    
+    Card description with more content
+  </div>
+  <div slot="col2">
+    **Card Title 2**
+    
+    Another card with different content
+  </div>
+</GridX>
+```
+
+## Comparison Tables
+
+Side-by-side comparisons:
+
+``` astro
+<GridX cols={3} gap="1rem">
+  <div slot="col1">**Basic Plan** - $10/month</div>
+  <div slot="col2">**Pro Plan** - $25/month</div>
+  <div slot="col3">**Enterprise** - Custom pricing</div>
+</GridX>
+```
+
+----
+
+# Best Practices
+
+- Use semantic HTML inside slots for better accessibility
+- Consider mobile-first design when planning grid layouts
+- Test responsiveness at different breakpoints
+- Use appropriate gaps for visual hierarchy
+- Combine with other components like Cards or ContainerSection
+- Keep column content balanced for better visual appeal
+- Use consistent spacing patterns throughout your design
+
+----
+
+# What to Avoid
+
+- **Don't exceed 12 columns** - The component supports a maximum of 12 slots
+- **Don't use too many columns on mobile** - Content becomes too narrow and hard to read
+- **Don't mix different gap units inconsistently** - Stick to consistent spacing patterns
+- **Don't create overly complex nested grids** - Keep layouts simple and maintainable
+- **Don't ignore responsive behavior** - Always test on different screen sizes
+- **Don't use GridX for simple two-column layouts** - Consider simpler CSS solutions for basic cases
+- **Don't forget to provide meaningful content** - Empty or placeholder content reduces user experience

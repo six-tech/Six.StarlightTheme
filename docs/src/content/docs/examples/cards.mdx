@@ -1,0 +1,226 @@
+---
+title: Cards
+description: Learn how to use card components to display information in organized, visually appealing layouts with support for icons, titles, and grid arrangements.
+---
+
+# Introduction
+
+Cards are versatile components that help organize and display information in a structured, visually appealing way. They're perfect for showcasing features, navigation links, or grouping related content. The Six Starlight Theme provides several card components including basic cards, link cards, and grid layouts.
+
+## Props
+
+### Card Component
+
+| Prop Name | Prop Type | Description |
+|-----------|-----------|-------------|
+| `title` | `string` | The title displayed at the top of the card |
+| `icon` | `string` | Optional icon name to display alongside the title |
+| `children` | `ReactNode` | The content to display inside the card |
+
+### CardGrid Component
+
+| Prop Name | Prop Type | Description |
+|-----------|-----------|-------------|
+| `stagger` | `boolean` | Whether to apply staggered animation effects to grid items |
+| `children` | `ReactNode` | Card components to arrange in the grid |
+
+### LinkCard Component
+
+| Prop Name | Prop Type | Description |
+|-----------|-----------|-------------|
+| `title` | `string` | The title displayed at the top of the link card |
+| `description` | `string` | Optional description text below the title |
+| `href` | `string` | The URL or path the card links to |
+| `icon` | `string` | Optional icon name to display alongside the title |
+
+# Basic Card
+----
+
+The basic `Card` component displays content with an optional title and icon.
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components'
+
+## Simple Card
+
+```jsx
+<Card title="Basic Card Example">
+  This is a simple card that displays content with a title. Perfect for highlighting important information or grouping related content.
+</Card>
+```
+
+<Card title="Basic Card Example">
+  This is a simple card that displays content with a title. Perfect for highlighting important information or grouping related content.
+</Card>
+
+## Card with Icon
+
+```jsx
+<Card title="Card with Icon" icon="star">
+  This card includes a star icon to draw attention and make it more visually distinctive.
+</Card>
+```
+
+<Card title="Card with Icon" icon="star">
+  This card includes a star icon to draw attention and make it more visually distinctive.
+</Card>
+
+# Card Grids
+----
+
+Use `CardGrid` to arrange multiple cards in a responsive grid layout.
+
+## Basic Grid
+
+```jsx
+<CardGrid>
+  <Card title="Feature One" icon="star">
+    This card showcases the first feature with an icon and description.
+  </Card>
+  <Card title="Feature Two" icon="moon">
+    This card showcases the second feature with a different icon.
+  </Card>
+  <Card title="Feature Three" icon="heart">
+    This card showcases the third feature with another icon.
+  </Card>
+</CardGrid>
+```
+
+<CardGrid>
+  <Card title="Feature One" icon="star">
+    This card showcases the first feature with an icon and description.
+  </Card>
+  <Card title="Feature Two" icon="moon">
+    This card showcases the second feature with a different icon.
+  </Card>
+  <Card title="Feature Three" icon="heart">
+    This card showcases the third feature with another icon.
+  </Card>
+</CardGrid>
+
+## Staggered Grid
+
+```jsx
+<CardGrid stagger>
+  <Card title="Staggered Card 1" icon="star">
+    This card appears with a staggered animation effect.
+  </Card>
+  <Card title="Staggered Card 2" icon="moon">
+    The stagger effect creates visual interest and guides the eye.
+  </Card>
+  <Card title="Staggered Card 3" icon="heart">
+    Each card appears with a slight delay for better UX.
+  </Card>
+</CardGrid>
+```
+
+<CardGrid stagger>
+  <Card title="Staggered Card 1" icon="star">
+    This card appears with a staggered animation effect.
+  </Card>
+  <Card title="Staggered Card 2" icon="moon">
+    The stagger effect creates visual interest and guides the eye.
+  </Card>
+  <Card title="Staggered Card 3" icon="heart">
+    Each card appears with a slight delay for better UX.
+  </Card>
+</CardGrid>
+
+# Link Cards
+----
+
+`LinkCard` components are clickable cards that navigate to other pages or sections.
+
+## Single Link Card
+
+```jsx
+<LinkCard
+  title="Getting Started Guide"
+  description="Learn the basics of using the Six Starlight Theme with our comprehensive getting started guide."
+  href="#"
+/>
+```
+
+<LinkCard
+  title="Getting Started Guide"
+  description="Learn the basics of using the Six Starlight Theme with our comprehensive getting started guide."
+  href="#"
+/>
+
+## Link Cards in Grid
+
+```jsx
+<CardGrid>
+  <LinkCard 
+    title="Documentation" 
+    description="Browse our comprehensive documentation"
+    href="#" 
+  />
+  <LinkCard 
+    title="Examples" 
+    description="View practical examples and use cases"
+    href="#" 
+  />
+  <LinkCard 
+    title="Components" 
+    description="Explore available components and their usage"
+    href="#" 
+  />
+</CardGrid>
+```
+
+<CardGrid>
+  <LinkCard 
+    title="Documentation" 
+    description="Browse our comprehensive documentation"
+    href="#" 
+  />
+  <LinkCard 
+    title="Examples" 
+    description="View practical examples and use cases"
+    href="#" 
+  />
+  <LinkCard 
+    title="Components" 
+    description="Explore available components and their usage"
+    href="#" 
+  />
+</CardGrid>
+
+# Advanced Usage
+----
+
+## Custom Card Styling
+
+Cards automatically inherit the theme's styling but you can customize their appearance using CSS custom properties.
+
+## Responsive Behavior
+
+Card grids automatically adjust their layout based on screen size:
+- **Mobile**: Single column layout
+- **Tablet**: Two-column layout  
+- **Desktop**: Three or more columns depending on available space
+
+## Icon Support
+
+The icon system supports various icon sets and can be customized through the theme configuration.
+
+# Best Practices
+----
+
+- Use cards to group related information logically
+- Keep card titles concise and descriptive
+- Use icons consistently across similar card types
+- Ensure link cards have clear, actionable descriptions
+- Use staggered effects sparingly for special sections
+- Maintain consistent spacing and alignment in grids
+- Test card layouts on different screen sizes
+
+# What to Avoid
+----
+
+- **Don't overload cards with too much content** - Keep them focused and scannable
+- **Don't use cards for simple text content** - Use regular paragraphs instead
+- **Don't mix different card types in the same grid** - Maintain visual consistency
+- **Don't use cards for navigation menus** - Use proper navigation components
+- **Don't create overly complex card hierarchies** - Keep the structure simple and intuitive
+- **Don't use cards without clear purpose** - Each card should serve a specific function

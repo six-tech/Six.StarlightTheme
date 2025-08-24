@@ -1,0 +1,193 @@
+---
+title: Code Blocks
+description: Learn how to use code blocks to display syntax-highlighted code examples, configuration files, and terminal commands in your documentation.
+---
+
+# Introduction
+
+Code blocks are essential components for displaying code examples, configuration files, terminal commands, and other technical content in your documentation. The Six Starlight Theme provides enhanced code block styling with syntax highlighting, copy functionality, and responsive design. Code blocks help developers understand how to implement features and configure their projects.
+
+## Props
+
+Code blocks use markdown syntax and don't accept traditional props. They're implemented using triple backticks with optional language specification.
+
+| Element | Syntax | Description |
+|---------|--------|-------------|
+| Basic code block | ````markdown```language<br/>code here<br/>`````` | Code block with syntax highlighting |
+| Language identifier | `js`, `ts`, `css`, `html`, `json`, `yaml`, `bash`, etc. | Specifies the programming language for syntax highlighting |
+| Inline code | `` `code` `` | Short code snippets within text |
+
+# Basic Code Blocks
+----
+
+The simplest form of code blocks displays code with basic syntax highlighting.
+
+## JavaScript Example
+
+```js
+// JavaScript code block
+function example() {
+  const message = 'Hello, World!';
+  console.log(message);
+  return message;
+}
+```
+
+## TypeScript Example
+
+```ts
+// TypeScript example
+interface Theme {
+  name: string;
+  version: string;
+}
+
+const theme: Theme = {
+  name: 'six-starlight',
+  version: '1.0.0'
+};
+
+console.log('Theme loaded:', theme.name);
+```
+
+# Terminal Commands
+----
+
+Code blocks are perfect for displaying terminal commands and shell scripts.
+
+## Package Installation
+
+```bash
+# Install the theme
+npm install @six/starlight-theme
+
+# Add to configuration
+npm run build
+
+# Start development server
+npm run dev
+```
+
+## Alternative Package Managers
+
+```sh
+# Alternative installation methods
+pnpm add @six/starlight-theme
+yarn add @six/starlight-theme
+```
+
+# Configuration Files
+----
+
+Code blocks support various configuration file formats with appropriate syntax highlighting.
+
+## JSON Configuration
+
+```json
+{
+  "theme": "six-starlight",
+  "version": "2.0.0",
+  "features": {
+    "darkMode": true,
+    "customization": true,
+    "components": true
+  }
+}
+```
+
+## YAML Configuration
+
+```yaml
+# YAML configuration
+theme: six-starlight
+version: 2.0.0
+features:
+  darkMode: true
+  customization: true
+  components: true
+```
+
+## CSS Styling
+
+```css
+/* CSS code block */
+.example {
+  color: var(--sl-color-accent);
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+/* Custom CSS variables */
+:root {
+  --sl-color-accent: #0066cc;
+  --sl-color-accent-low: #e6f0ff;
+  --sl-color-accent-high: #004499;
+}
+```
+
+# Inline Code
+----
+
+Use inline code formatting for short code snippets, file names, and technical terms.
+
+## Usage Examples
+
+This theme supports `inline code` formatting for short snippets. You can reference files like `astro.config.mjs` or use technical terms like `npm install` inline.
+
+# Advanced Usage
+----
+
+## Language Support
+
+The theme supports syntax highlighting for many programming languages:
+
+| Language | Identifier | Use Case |
+|----------|------------|----------|
+| JavaScript | `js` or `javascript` | JavaScript code examples |
+| TypeScript | `ts` or `typescript` | TypeScript code examples |
+| CSS | `css` | Stylesheet examples |
+| HTML | `html` | HTML markup examples |
+| JSON | `json` | Configuration files |
+| YAML | `yaml` | YAML configuration |
+| TOML | `toml` | TOML configuration |
+| Bash | `bash` or `sh` | Terminal commands |
+| Markdown | `md` or `markdown` | Markdown examples |
+
+## Copy Functionality
+
+Code blocks include a copy button that allows users to easily copy code to their clipboard.
+
+## Responsive Design
+
+Code blocks automatically adapt to different screen sizes:
+- **Desktop**: Full-width display with optimal readability
+- **Mobile**: Scrollable content with touch-friendly controls
+
+## Accessibility
+
+Code blocks include proper accessibility features:
+- High contrast syntax highlighting
+- Proper semantic markup
+- Keyboard navigation support
+
+# Best Practices
+----
+
+- Always specify the language for proper syntax highlighting
+- Use descriptive file names when relevant
+- Keep code examples focused and relevant
+- Include comments to explain complex logic
+- Test code examples to ensure they work correctly
+- Use consistent formatting and indentation
+- Provide context for code examples
+
+# What to Avoid
+----
+
+- **Don't use code blocks for non-code content** - Use regular text formatting instead
+- **Don't include unnecessary code** - Keep examples focused and relevant
+- **Don't forget to specify the language** - This ensures proper syntax highlighting
+- **Don't use code blocks for simple text** - Use inline code formatting for short snippets
+- **Don't create overly long code examples** - Break them into logical sections
+- **Don't use code blocks without context** - Always explain what the code does
+- **Don't include broken or outdated code** - Ensure examples are current and functional

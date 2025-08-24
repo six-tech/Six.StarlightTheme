@@ -1,0 +1,17 @@
+---
+import SidebarSublist from './SidebarSublist.astro'
+
+const { sidebar } = Astro.locals.starlightRoute
+---
+
+<div class="sidebar">
+  <div class="container-sidebar">
+    <SidebarSublist sublist={sidebar} />
+  </div>
+</div>
+
+<style>
+  .container-sidebar {
+    gap: 0;
+  }
+</style>

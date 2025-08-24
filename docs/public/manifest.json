@@ -1,0 +1,39 @@
+{
+  "name": "SIX Theme - Starlight Theme Six",
+  "short_name": "SIX Theme",
+  "description": "A beautiful dark theme for Astro.js Starlight documentation sites",
+  "start_url": "/",
+  "scope": "/",
+  "background_color": "#0E0E0E",
+  "theme_color": "#0E0E0E",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "developer"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icon-64.png",
+      "type": "image/png",
+      "sizes": "64x64",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ]
+}

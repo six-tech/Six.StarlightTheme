@@ -1,0 +1,181 @@
+---
+title: ContainerSectionX
+description: Learn how to use the ContainerSectionX component to create flexible container layouts with customizable padding and optional borders.
+---
+
+# Introduction
+
+The ContainerSectionX component is a flexible container component that extends the functionality of the basic ContainerSection component. It provides precise control over horizontal and vertical padding, plus an optional border feature for enhanced visual separation. This component maintains responsive behavior while offering runtime customization of spacing and appearance.
+
+## Props
+
+| Prop Name | Prop Type | Description |
+|-----------|-----------|-------------|
+| `px` | `string` | Horizontal padding (left and right) applied to the container (default: "1rem") |
+| `py` | `string` | Vertical padding (top and bottom) applied to the container (default: "1rem") |
+| `border` | `boolean` | Whether to apply a border using `var(--border)` (default: false) |
+| `children` | `ReactNode` | The content to display inside the container |
+
+# Basic Container
+----
+
+The simplest form of ContainerSectionX with default padding and no border.
+
+import { ContainerSectionX } from 'starlight-theme-six/components'
+
+## Default Container
+
+```jsx
+<ContainerSectionX>
+  <h3>Default Padding</h3>
+  <p>This uses the default 1rem padding on all sides with no border.</p>
+</ContainerSectionX>
+```
+
+<ContainerSectionX>
+  <h3>Default Padding</h3>
+  <p>This uses the default 1rem padding on all sides with no border.</p>
+</ContainerSectionX>
+
+# Custom Padding
+----
+
+## Horizontal and Vertical Padding
+
+```jsx
+<ContainerSectionX px="3rem" py="2rem">
+  <h3>Custom Padding</h3>
+  <p>This section has 3rem horizontal padding and 2rem vertical padding.</p>
+</ContainerSectionX>
+```
+
+<ContainerSectionX px="3rem" py="2rem">
+  <h3>Custom Padding</h3>
+  <p>This section has 3rem horizontal padding and 2rem vertical padding.</p>
+</ContainerSectionX>
+
+## Compact Section
+
+```jsx
+<ContainerSectionX px="0.5rem" py="0.5rem">
+  <h3>Compact Section</h3>
+  <p>Minimal padding for tight layouts.</p>
+</ContainerSectionX>
+```
+
+<ContainerSectionX px="0.5rem" py="0.5rem">
+  <h3>Compact Section</h3>
+  <p>Minimal padding for tight layouts.</p>
+</ContainerSectionX>
+
+## Spacious Section
+
+```jsx
+<ContainerSectionX px="4rem" py="3rem">
+  <h3>Spacious Section</h3>
+  <p>Extra generous padding for important content sections that need breathing room.</p>
+</ContainerSectionX>
+```
+
+<ContainerSectionX px="4rem" py="3rem">
+  <h3>Spacious Section</h3>
+  <p>Extra generous padding for important content sections that need breathing room.</p>
+</ContainerSectionX>
+
+# Border Options
+----
+
+## With Border
+
+```jsx
+<ContainerSectionX border={true}>
+  <h3>Section with Border</h3>
+  <p>This section includes a border using the theme's border color variable.</p>
+</ContainerSectionX>
+```
+
+<ContainerSectionX border={true}>
+  <h3>Section with Border</h3>
+  <p>This section includes a border using the theme's border color variable.</p>
+</ContainerSectionX>
+
+## Border with Custom Padding
+
+```jsx
+<ContainerSectionX px="2rem" py="1.5rem" border={true}>
+  <h3>Bordered Section with Custom Padding</h3>
+  <p>Combines custom padding with border for enhanced visual separation.</p>
+</ContainerSectionX>
+```
+
+<ContainerSectionX px="2rem" py="1.5rem" border={true}>
+  <h3>Bordered Section with Custom Padding</h3>
+  <p>Combines custom padding with border for enhanced visual separation.</p>
+</ContainerSectionX>
+
+# Advanced Usage
+----
+
+## Responsive Padding
+
+```jsx
+<ContainerSectionX px="clamp(1rem, 5vw, 4rem)" py="2.5rem">
+  <h3>Responsive Padding</h3>
+  <p>Using CSS clamp() for responsive horizontal padding that scales with viewport width.</p>
+</ContainerSectionX>
+```
+
+<ContainerSectionX px="clamp(1rem, 5vw, 4rem)" py="2.5rem">
+  <h3>Responsive Padding</h3>
+  <p>Using CSS clamp() for responsive horizontal padding that scales with viewport width.</p>
+</ContainerSectionX>
+
+## Calculated Values
+
+```jsx
+<ContainerSectionX px="calc(2rem + 2vw)" py="clamp(1rem, 3vh, 3rem)" border={true}>
+  <h3>Calculated Padding</h3>
+  <p>Supports any valid CSS length value including calculated and responsive values.</p>
+</ContainerSectionX>
+```
+
+<ContainerSectionX px="calc(2rem + 2vw)" py="clamp(1rem, 3vh, 3rem)" border={true}>
+  <h3>Calculated Padding</h3>
+  <p>Supports any valid CSS length value including calculated and responsive values.</p>
+</ContainerSectionX>
+
+## Nested Containers
+
+```jsx
+<ContainerSectionX px="0" py="2rem">
+  <ContainerSectionX px="1rem" py="0" border={true}>
+    <p>Nested containers with different padding strategies for complex layouts.</p>
+  </ContainerSectionX>
+</ContainerSectionX>
+```
+
+<ContainerSectionX px="0" py="2rem">
+  <ContainerSectionX px="1rem" py="0" border={true}>
+    <p>Nested containers with different padding strategies for complex layouts.</p>
+  </ContainerSectionX>
+</ContainerSectionX>
+
+# Best Practices
+----
+
+- Use ContainerSectionX for content sections that need consistent spacing
+- Apply borders to highlight important content blocks
+- Use responsive CSS values for adaptive layouts
+- Test padding values across different screen sizes
+- Combine with other components for rich page layouts
+- Use nested containers for complex layout requirements
+
+# What to Avoid
+----
+
+- **Don't use excessive padding values** - Keep spacing proportional to content
+- **Don't overuse borders** - They should enhance, not overwhelm the design
+- **Don't use fixed pixel values for responsive designs** - Prefer relative units
+- **Don't create deeply nested container structures** - Keep layouts simple and maintainable
+- **Don't ignore mobile responsiveness** - Test on different device sizes
+- **Don't use containers without clear purpose** - Each container should serve a layout function

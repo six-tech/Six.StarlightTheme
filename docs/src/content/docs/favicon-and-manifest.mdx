@@ -1,0 +1,269 @@
+---
+title: Favicon and Manifest
+description: Learn how to customize favicons, Apple touch icons, and web app manifest for your Starlight site
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This theme provides built-in support for favicons, Apple touch icons, and Progressive Web App (PWA) manifest configuration through a convenient helper function.
+
+# Introduction
+
+The SIX Theme includes a `getFavIcons()` function that automatically configures:
+
+- **Modern favicons** in multiple formats (SVG, PNG)
+- **Apple touch icons** for iOS devices
+- **Web app manifest** for PWA functionality
+- **Theme color** for mobile browsers
+
+# Quick Setup
+
+## 1. Add Your Icon Files
+
+Place your favicon and icon files in the `public` directory of your documentation site:
+
+```
+docs/public/
+├── favicon.svg          # Vector favicon (recommended)
+├── icon-64.png         # Small favicon (64x64)
+├── icon-192.png        # Standard icon (192x192)
+├── icon-512.png        # Large icon (512x512)
+└── manifest.json       # PWA manifest
+```
+
+## 2. Configure in astro.config.ts
+
+Import and use the `getFavIcons()` function in your Astro configuration:
+
+``` ts title="docs/astro.config.ts"
+import starlight from '@astrojs/starlight'
+import { defineConfig } from 'astro/config'
+import { getFavIcons } from './config/head'
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'My Documentation',
+      logo: {
+        src: './src/assets/logo.svg',
+      },
+      // Add favicon configuration
+      head: [
+        ...getFavIcons(),
+        // Add additional head elements here if needed
+      ],
+      // ... other configuration
+    }),
+  ],
+})
+```
+
+# Icon Requirements
+
+## Recommended Sizes
+
+| File           | Size    | Purpose                         |
+|----------------|---------|---------------------------------|
+| `favicon.svg`  | Vector  | Modern browsers (scalable)      |
+| `icon-64.png`  | 64×64   | Small favicon                   |
+| `icon-192.png` | 192×192 | Standard icon, Apple touch icon |
+| `icon-512.png` | 512×512 | Large displays, PWA icon        |
+
+## File Formats
+
+- **SVG**: Preferred for modern browsers (scalable, small file size)
+- **PNG**: Required for compatibility and specific sizes
+- **ICO**: Not required when using SVG + PNG combination
+
+# Manifest Configuration
+
+## Default manifest.json
+
+The theme expects a `manifest.json` file in your `public` directory:
+
+``` json title="docs/public/manifest.json"
+{
+  "name": "Your Site Name",
+  "short_name": "Short Name",
+  "description": "Your site description",
+  "start_url": "/",
+  "scope": "/",
+  "background_color": "#0E0E0E",
+  "theme_color": "#0E0E0E",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "developer"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icon-64.png",
+      "type": "image/png",
+      "sizes": "64x64",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    }
+  ]
+}
+```
+
+## Customizing Colors
+
+Update the `background_color` and `theme_color` to match your site's design:
+
+- **Light themes**: Use light colors like `#ffffff`
+- **Dark themes**: Use dark colors like `#0E0E0E`
+- **Brand themes**: Use your brand's primary color
+
+# Advanced Configuration
+
+## Adding Custom Head Elements
+
+You can extend the head configuration with additional elements:
+
+``` js title="docs/astro.config.ts"
+head: [
+  ...getFavIcons(),
+  // Add custom meta tags
+  {
+    tag: 'meta',
+    attrs: {
+      name: 'author',
+      content: 'Your Name'
+    }
+  },
+  // Add custom stylesheets
+  {
+    tag: 'link',
+    attrs: {
+      rel: 'stylesheet',
+      href: '/custom-styles.css'
+    }
+  }
+],
+```
+
+## Customizing the getFavIcons Function
+
+If you need to modify the favicon configuration, you can edit the `getFavIcons()` function in `docs/config/head.ts`:
+
+```` jsx
+<Tabs>
+<TabItem label="Default Configuration">
+
+``` ts title="docs/config/head.ts"
+export function getFavIcons() {
+  return [
+    // SVG favicon for modern browsers
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/favicon.svg',
+      },
+    },
+    // PNG fallbacks
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '192x192',
+        href: '/icon-192.png',
+      },
+    },
+    // ... more configurations
+  ] as const
+}
+```
+
+</TabItem>
+<TabItem label="Custom Theme Color">
+
+``` ts title="docs/config/head.ts"
+export function getFavIcons(themeColor = '#0E0E0E') {
+  return [
+    // ... favicon configurations
+    
+    // Custom theme color
+    {
+      tag: 'meta',
+      attrs: {
+        name: 'theme-color',
+        content: themeColor,
+      },
+    },
+  ] as const
+}
+```
+
+Then use it in your config:
+
+```ts title="docs/astro.config.ts"
+head: [
+  ...getFavIcons('#your-brand-color'),
+]
+```
+
+</TabItem>
+</Tabs>
+````
+
+# Testing Your Configuration
+
+After setting up your favicons and manifest:
+
+1. **Build your site**: `npm run build`
+2. **Test in browsers**: Check that favicons appear in tabs and bookmarks
+3. **Test on mobile**: Verify Apple touch icons work on iOS
+4. **PWA testing**: Use browser dev tools to test manifest functionality
+5. **Lighthouse audit**: Run a Lighthouse audit to verify PWA compliance
+
+# Troubleshooting
+
+## Icons Not Appearing
+
+- Ensure files are in the `public` directory, not `src`
+- Check file names match exactly (case-sensitive)
+- Verify file formats are correct (PNG for specific sizes, SVG for vector)
+- Clear browser cache and hard refresh
+
+## Manifest Issues
+
+- Validate your `manifest.json` using online validators
+- Ensure all icon paths in the manifest match actual files
+- Check that `start_url` and `scope` are correctly configured
+- Verify colors are valid hex codes
+
+## Build Errors
+
+- Make sure `getFavIcons` is properly imported
+- Check for syntax errors in `astro.config.ts`
+- Ensure all file references to exist in the `public` directory
+
+# Browser Support
+
+| Feature           | Support                                              |
+|-------------------|------------------------------------------------------|
+| SVG Favicons      | Modern browsers (Chrome 80+, Firefox 41+, Safari 9+) |
+| PNG Favicons      | All browsers                                         |
+| Apple Touch Icons | iOS Safari, Chrome on iOS                            |
+| Web Manifest      | Modern browsers with PWA support                     |
+| Theme Color       | Mobile browsers (Chrome, Safari)                     |

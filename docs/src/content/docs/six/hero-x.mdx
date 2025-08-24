@@ -1,0 +1,456 @@
+---
+title: HeroX
+description: Learn how to use the HeroX component to create compelling hero sections with background images, flexible positioning, and responsive behavior.
+---
+
+import { HeroX } from 'starlight-theme-six/components'
+import heroImage from '../../../assets/six-banner-wide-1980-01.png'
+
+# Introduction
+
+The HeroX component is a custom hero component designed specifically for the Six theme, providing enhanced styling and functionality for creating compelling landing page heroes. It offers full control over image dimensions, background images, content positioning, and responsive behavior with automatic title and tagline integration from frontmatter.
+
+----
+
+## Props
+
+| Prop Name | Prop Type | Description | Default |
+|-----------|-----------|-------------|---------|
+| `title` | `string` | Custom title (overrides frontmatter) | Frontmatter `title` |
+| `tagline` | `string` | Custom tagline (overrides frontmatter) | Frontmatter `description` |
+| `titleColor` | `string` | Color for title text | `var(--foreground-light)` |
+| `taglineColor` | `string` | Color for tagline text | `var(--muted-foreground)` |
+| `gap` | `number \| string` | Vertical spacing between title and tagline | `"0.25rem"` |
+| `height` | `number \| string` | Height of hero container | `auto` (standard), `"60vh"` (background) |
+| `px` | `number \| string` | Horizontal padding | `"2rem"` |
+| `py` | `number \| string` | Vertical padding | `"2rem"` |
+| `image` | `object` | Image configuration object | - |
+| `actions` | `array` | Array of action button objects | - |
+
+----
+
+# Basic Usage
+
+The HeroX component automatically pulls title and description from your page's frontmatter when used with `template: splash`.
+
+## Simple Hero
+
+``` astro
+---
+title: My Page Title
+description: A compelling description of your project
+template: splash
+---
+
+import { HeroX } from 'starlight-theme-six/components'
+
+<HeroX />
+```
+
+<HeroX 
+  title="Welcome"
+  tagline="Build amazing documentation sites with Starlight"
+/>
+
+## Custom Title and Tagline
+
+``` astro
+<HeroX 
+  title="Custom Hero Title"
+  tagline="This overrides the frontmatter description"
+/>
+```
+
+<HeroX 
+  title="Custom Hero Title"
+  tagline="This overrides the frontmatter description"
+/>
+
+----
+
+# Image Configuration
+
+## Standard Images
+
+For regular image display (non-background):
+
+``` astro
+<HeroX 
+  image={{
+    file: heroImage,
+    alt: "Hero image description",
+    width: "1920px",
+    height: "640px"
+  }}
+/>
+```
+
+## Background Images
+
+For background images with overlay content:
+
+``` astro
+<HeroX 
+  height="100vh"
+  px="4rem"
+  py="3rem"
+  image={{
+    background: heroImage,
+    alt: "Hero background image",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    contentPosition: "middle-left"
+  }}
+/>
+```
+
+## Responsive Background Images
+
+For comprehensive theme and device support:
+
+``` astro
+import backgroundDesktopLight from '../../assets/hero-desktop-light.jpg'
+import backgroundDesktopDark from '../../assets/hero-desktop-dark.jpg'
+import backgroundMobileLight from '../../assets/hero-mobile-light.jpg'
+import backgroundMobileDark from '../../assets/hero-mobile-dark.jpg'
+
+<HeroX 
+  height="80vh"
+  px="2rem"
+  py="2rem"
+  image={{
+    background: backgroundDesktopLight,
+    backgroundLight: backgroundDesktopLight,
+    backgroundDark: backgroundDesktopDark,
+    backgroundMobileLight: backgroundMobileLight,
+    backgroundMobileDark: backgroundMobileDark,
+    alt: "Responsive hero background",
+    backgroundSize: "cover",
+    contentPosition: "bottom-right"
+  }}
+/>
+```
+
+----
+
+# Content Positioning
+
+When using background images, you can position content using these presets:
+
+## Position Grid
+
+| Left | Center | Right |
+|------|--------|-------|
+| `top-left` | `top-center` | `top-right` |
+| `middle-left` | `middle-center` | `middle-right` |
+| `bottom-left` | `bottom-center` | `bottom-right` |
+
+## Available Positions
+
+### Top Positions
+- **`top-left`** - Top-left corner with left-aligned text
+- **`top-center`** - Top center with center-aligned text  
+- **`top-right`** - Top-right corner with right-aligned text
+
+### Middle Positions
+- **`middle-left`** - Vertical center, left aligned
+- **`middle-center`** - Perfect center (default)
+- **`middle-right`** - Vertical center, right aligned
+
+### Bottom Positions
+- **`bottom-left`** - Bottom-left corner with left-aligned text
+- **`bottom-center`** - Bottom center with center-aligned text
+- **`bottom-right`** - Bottom-right corner with right-aligned text
+
+## Center Position Example
+
+``` astro
+<HeroX 
+  title="Background Hero"
+  tagline="Content positioned in the center"
+  titleColor="#ffffff"
+  taglineColor="#e2e8f0"
+  height="400px"
+  image={{
+    background: heroImage,
+    backgroundSize: "cover",
+    contentPosition: "middle-center"
+  }}
+/>
+```
+
+<HeroX 
+  title="Background Hero"
+  tagline="Content positioned in the center"
+  titleColor="#ffffff"
+  taglineColor="#e2e8f0"
+  height="400px"
+  image={{
+    background: heroImage,
+    alt: "Hero background",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    contentPosition: "middle-center"
+  }}
+/>
+
+## Bottom Right Position Example
+
+``` astro
+<HeroX 
+  title="Bottom Right Hero"
+  tagline="Content positioned in bottom-right corner"
+  titleColor="#fbbf24"
+  taglineColor="#f3f4f6"
+  height="400px"
+  px="3rem"
+  py="2rem"
+  image={{
+    background: heroImage,
+    backgroundSize: "cover",
+    contentPosition: "bottom-right"
+  }}
+/>
+```
+
+<HeroX 
+  title="Bottom Right Hero"
+  tagline="Content positioned in bottom-right corner"
+  titleColor="#fbbf24"
+  taglineColor="#f3f4f6"
+  height="400px"
+  px="3rem"
+  py="2rem"
+  image={{
+    background: heroImage,
+    alt: "Hero background",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    contentPosition: "bottom-right"
+  }}
+/>
+
+----
+
+# Action Buttons
+
+Add action buttons to guide users to key pages or features.
+
+## Basic Actions
+
+``` astro
+<HeroX 
+  title="Hero with Actions"
+  tagline="Get started with your documentation"
+  actions={[
+    {
+      text: "Get Started",
+      link: "/getting-started/"
+    },
+    {
+      text: "View Examples",
+      link: "/examples/",
+      variant: "minimal"
+    }
+  ]}
+/>
+```
+
+## Actions with Background
+
+``` astro
+<HeroX 
+  title="Hero with Actions"
+  tagline="Demonstrating action buttons with background positioning"
+  titleColor="#10b981"
+  taglineColor="#d1fae5"
+  height="350px"
+  px="4rem"
+  py="3rem"
+  image={{
+    background: heroImage,
+    backgroundSize: "cover",
+    contentPosition: "middle-left"
+  }}
+  actions={[
+    {
+      text: "Primary Action",
+      link: "#"
+    },
+    {
+      text: "Secondary",
+      link: "#",
+      variant: "minimal"
+    }
+  ]}
+/>
+```
+
+<HeroX 
+  title="Hero with Actions"
+  tagline="Demonstrating action buttons with background positioning"
+  titleColor="#10b981"
+  taglineColor="#d1fae5"
+  height="350px"
+  px="4rem"
+  py="3rem"
+  image={{
+    background: heroImage,
+    alt: "Hero background",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    contentPosition: "middle-left"
+  }}
+  actions={[
+    {
+      text: "Primary Action",
+      link: "#"
+    },
+    {
+      text: "Secondary",
+      link: "#",
+      variant: "minimal"
+    }
+  ]}
+/>
+
+----
+
+# Advanced Usage
+
+## Custom Colors
+
+Customize title and tagline colors for better contrast:
+
+``` astro
+<HeroX 
+  title="Colorful Hero"
+  tagline="Custom colors for better visibility"
+  titleColor="#3b82f6"
+  taglineColor="#64748b"
+/>
+```
+
+<HeroX 
+  title="Colorful Hero"
+  tagline="Custom colors for better visibility"
+  titleColor="#3b82f6"
+  taglineColor="#64748b"
+/>
+
+## Full Configuration Example
+
+``` astro
+---
+title: My Documentation
+description: Comprehensive guide to building with our platform
+template: splash
+editUrl: false
+---
+
+<HeroX 
+  height="80vh"
+  px="3rem"
+  py="2rem"
+  titleColor="#ffffff"
+  taglineColor="#e2e8f0"
+  image={{
+    background: heroImage,
+    alt: "Hero background image",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    contentPosition: "bottom-left"
+  }}
+  actions={[
+    {
+      text: "Get Started",
+      link: "/getting-started/"
+    },
+    {
+      text: "View Examples",
+      link: "/examples/",
+      variant: "minimal"
+    }
+  ]}
+/>
+```
+
+## Background Image Fallback Logic
+
+The component uses intelligent fallback for responsive images:
+
+1. **Mobile Light**: `backgroundMobileLight` → `backgroundMobile` → `backgroundLight` → `background`
+2. **Mobile Dark**: `backgroundMobileDark` → `backgroundMobile` → `backgroundDark` → `background`  
+3. **Desktop Light**: `backgroundLight` → `background`
+4. **Desktop Dark**: `backgroundDark` → `background`
+5. **Fallback**: `background` (required)
+
+----
+
+# Integration
+
+## Setup with Splash Template
+
+``` astro
+---
+title: Your Page Title
+description: Your page description
+template: splash
+editUrl: false
+---
+
+import { HeroX } from 'starlight-theme-six/components'
+import heroImage from '../../assets/your-image.png'
+
+<HeroX 
+  height="80vh"
+  px="3rem"
+  py="2rem"
+  image={{
+    background: heroImage,
+    contentPosition: "bottom-left",
+    backgroundSize: "cover"
+  }}
+  actions={[
+    {
+      text: "Get Started",
+      link: "/getting-started/"
+    }
+  ]}
+/>
+```
+
+## Action Button Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `text` | `string` | Button label text |
+| `link` | `string` | URL or internal path |
+| `variant` | `'primary' \| 'minimal'` | Button style variant |
+| `attrs` | `Record<string, any>` | Additional HTML attributes |
+| `icon` | `{ html?: string }` | Icon HTML content |
+
+----
+
+# Best Practices
+
+- Use `template: splash` in frontmatter to prevent title duplication
+- Choose appropriate content positioning based on your background image
+- Test color contrast for accessibility with custom colors
+- Use semantic action button text that clearly describes the destination
+- Consider mobile responsiveness when setting heights and padding
+- Provide meaningful alt text for background images
+- Test different screen sizes to ensure content remains readable
+
+----
+
+# What to Avoid
+
+- **Don't use extremely tall hero sections** - Consider user experience and content below the fold
+- **Don't use low-contrast color combinations** - Ensure text is readable against backgrounds
+- **Don't forget alt text for images** - Important for accessibility and SEO
+- **Don't use too many action buttons** - Keep it focused with 1-3 primary actions
+- **Don't ignore mobile experience** - Test on smaller screens and adjust accordingly
+- **Don't use background images without proper fallbacks** - Provide appropriate fallback colors or images
+- **Don't position content where it might be cut off** - Consider safe areas for text placement

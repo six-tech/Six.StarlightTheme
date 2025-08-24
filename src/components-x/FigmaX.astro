@@ -1,0 +1,82 @@
+---
+export interface Props {
+  /**
+   * Width of the Figma embed. Can be specified in px, %, rem, etc.
+   * Default: '100%'
+   */
+  width?: string
+  /**
+   * Height of the Figma embed. Can be specified in px, %, rem, etc.
+   * Default: '450px'
+   */
+  height?: string
+  /**
+   * Figma embed URL (e.g., 'https://www.figma.com/embed?embed_host=share&url=...')
+   */
+  url: string
+}
+
+const { width = '100%', height = '450px', url } = Astro.props
+
+// Validate that it's a Figma URL
+const isValidFigmaUrl = url.includes('figma.com')
+if (!isValidFigmaUrl) {
+  console.warn('FigmaX: URL should be a Figma embed URL (e.g., https://www.figma.com/embed?embed_host=share&url=...)')
+}
+
+// Process width and height to ensure they have units
+const processedWidth = typeof width === 'number' ? `${width}px` : width.match(/^\d+$/) ? `${width}px` : width
+
+const processedHeight = typeof height === 'number' ? `${height}px` : height.match(/^\d+$/) ? `${height}px` : height
+---
+
+<div class="figma-x-container" style={`width: ${processedWidth}; height: ${processedHeight};`}>
+  <iframe src={url} class="figma-x-iframe" allowfullscreen loading="lazy"></iframe>
+</div>
+
+<style>
+  .figma-x-container {
+    margin: 1.5rem auto;
+    max-width: 100%;
+    position: relative;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+    background-color: var(--sl-color-gray-6, #f5f5f5);
+  }
+
+  .figma-x-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  /* Dark mode adjustments */
+  :root[data-theme='dark'] .figma-x-container {
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.3),
+      0 2px 4px -2px rgb(0 0 0 / 0.3);
+    background-color: var(--sl-color-gray-6, #1a1a1a);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .figma-x-container {
+      margin: 1rem auto;
+    }
+  }
+
+  /* Loading state */
+  .figma-x-container:empty::before {
+    content: 'Loading Figma design...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--sl-color-text-accent);
+    font-size: 0.875rem;
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+export interface Props {
+  /**
+   * Width of the video player. Can be a number (px), percentage string (e.g., '100%'), or 'full' for 100% width
+   */
+  size?: string | number | 'full'
+  /**
+   * YouTube embed URL (e.g., 'https://www.youtube.com/embed/VIDEO_ID')
+   */
+  url: string
+}
+
+const { size = 'full', url } = Astro.props
+
+// Process the size prop
+let widthStyle: string
+let containerClass = 'youtube-x-container'
+
+if (size === 'full' || size === '100%') {
+  widthStyle = '100%'
+  containerClass += ' youtube-x-full'
+} else if (typeof size === 'number') {
+  widthStyle = `${size}px`
+} else if (typeof size === 'string') {
+  // Handle string values like '560px', '80%', etc.
+  widthStyle = size.includes('px') || size.includes('%') ? size : `${size}px`
+} else {
+  widthStyle = '100%'
+  containerClass += ' youtube-x-full'
+}
+
+// Extract video ID from URL if needed for validation
+const isValidYouTubeUrl = url.includes('youtube.com/embed/') || url.includes('youtu.be/')
+if (!isValidYouTubeUrl) {
+  console.warn('YouTubeX: URL should be a YouTube embed URL (e.g., https://www.youtube.com/embed/VIDEO_ID)')
+}
+---
+
+<div class={containerClass} style={`width: ${widthStyle};`}>
+  <div class="youtube-x-wrapper">
+    <iframe
+      src={url}
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen></iframe>
+  </div>
+</div>
+
+<style>
+  .youtube-x-container {
+    margin: 1.5rem auto;
+    max-width: 100%;
+  }
+
+  .youtube-x-container.youtube-x-full {
+    width: 100%;
+  }
+
+  .youtube-x-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    background-color: var(--sl-color-gray-6, #000);
+    border-radius: 0.5rem;
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  .youtube-x-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0.5rem;
+  }
+
+  /* Dark mode adjustments */
+  :root[data-theme='dark'] .youtube-x-wrapper {
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.3),
+      0 2px 4px -2px rgb(0 0 0 / 0.3);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .youtube-x-container {
+      margin: 1rem auto;
+    }
+  }
+</style>

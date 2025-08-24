@@ -1,0 +1,376 @@
+---
+title: Steps
+description: Learn how to use the Steps component from Starlight to create numbered, sequential instructions that guide users through processes step by step.
+---
+
+# Introduction
+
+The Steps component creates a visual numbered list that's perfect for tutorials, installation guides, and any process that requires sequential instructions. It automatically numbers each step and provides a clear visual hierarchy with proper styling and spacing. Steps can contain various types of content including text, code blocks, and even nested steps.
+
+## Props
+
+| Prop Name | Prop Type | Description |
+|-----------|-----------|-------------|
+| `children` | `ReactNode` | Numbered list items that define the steps |
+
+# Basic Steps
+----
+
+The simplest form of steps using the Steps component from Starlight.
+
+import { Steps } from '@astrojs/starlight/components'
+
+## Simple Steps
+
+````jsx
+<Steps>
+
+1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+   ```js
+   const foo = 'bar'
+   ```
+
+2. Aenean nisi sem, maximus at fringilla a, tempor non diam.
+
+</Steps>
+````
+
+<Steps>
+
+1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+   ```js
+   const foo = 'bar'
+   ```
+
+2. Aenean nisi sem, maximus at fringilla a, tempor non diam.
+
+</Steps>
+
+# Steps with Code Examples
+----
+
+Steps can contain various types of content to create comprehensive guides.
+
+## Installation Steps
+
+````jsx
+<Steps>
+
+1. Install the required dependencies for your project.
+
+   ```bash
+   npm install @astrojs/starlight
+   ```
+
+2. Configure your Astro project to use Starlight.
+
+   ```js
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+     integrations: [starlight({
+       title: 'My Documentation Site',
+     })],
+   });
+   ```
+
+3. Create your first documentation page.
+
+   ```markdown
+   ---
+   title: Getting Started
+   ---
+
+   # Welcome to my documentation!
+   ```
+
+</Steps>
+````
+
+<Steps>
+
+1. Install the required dependencies for your project.
+
+   ```bash
+   npm install @astrojs/starlight
+   ```
+
+2. Configure your Astro project to use Starlight.
+
+   ```js
+   // astro.config.mjs
+   import { defineConfig } from 'astro/config';
+   import starlight from '@astrojs/starlight';
+
+   export default defineConfig({
+     integrations: [starlight({
+       title: 'My Documentation Site',
+     })],
+   });
+   ```
+
+3. Create your first documentation page.
+
+   ```markdown
+   ---
+   title: Getting Started
+   ---
+
+   # Welcome to my documentation!
+   ```
+
+</Steps>
+
+## Steps with Mixed Content
+
+````jsx
+<Steps>
+
+1. **Project Setup** - Begin by setting up your development environment.
+
+   Make sure you have Node.js version 18 or higher installed before proceeding.
+
+2. **Configuration** - Configure your project with the necessary settings.
+
+   | Setting | Value | Description |
+   |---------|-------|-------------|
+   | `title` | `string` | Site title |
+   | `description` | `string` | Site description |
+
+3. **Testing** - Test your configuration to ensure everything works correctly.
+
+   Run the development server and verify that your site loads properly.
+
+</Steps>
+````
+
+<Steps>
+
+1. **Project Setup** - Begin by setting up your development environment.
+
+   Make sure you have Node.js version 18 or higher installed before proceeding.
+
+2. **Configuration** - Configure your project with the necessary settings.
+
+   | Setting | Value | Description |
+   |---------|-------|-------------|
+   | `title` | `string` | Site title |
+   | `description` | `string` | Site description |
+
+3. **Testing** - Test your configuration to ensure everything works correctly.
+
+   Run the development server and verify that your site loads properly.
+
+</Steps>
+
+# Nested Steps
+----
+
+The Steps component supports nesting for complex processes that require sub-steps.
+
+## Complex Process with Sub-steps
+
+````jsx
+<Steps>
+
+1. **Main Process** - Start with the primary task.
+
+   This is the main step that contains sub-processes.
+
+   <Steps>
+
+   1. **Sub-step A** - Complete the first sub-task.
+
+      ```js
+      // Example code for sub-step A
+      const stepA = 'completed';
+      ```
+
+   2. **Sub-step B** - Complete the second sub-task.
+
+      Additional details for the second sub-step.
+
+   </Steps>
+
+2. **Final Step** - Complete the overall process.
+
+   This step concludes the main process after all sub-steps are completed.
+
+</Steps>
+````
+
+<Steps>
+
+1. **Main Process** - Start with the primary task.
+
+   This is the main step that contains sub-processes.
+
+   <Steps>
+
+   1. **Sub-step A** - Complete the first sub-task.
+
+      ```js
+      // Example code for sub-step A
+      const stepA = 'completed';
+      ```
+
+   2. **Sub-step B** - Complete the second sub-task.
+
+      Additional details for the second sub-step.
+
+   </Steps>
+
+2. **Final Step** - Complete the overall process.
+
+   This step concludes the main process after all sub-steps are completed.
+
+</Steps>
+
+# Advanced Usage
+----
+
+## Steps with Rich Content
+
+Steps can contain any valid markdown content including asides, code blocks, and interactive elements.
+
+````jsx
+<Steps>
+
+1. **Installation** - Install the theme package.
+
+   ```bash
+   npm install @six/starlight-theme
+   ```
+
+   This will add the theme to your project dependencies.
+
+2. **Configuration** - Add the theme to your configuration.
+
+   Update your `astro.config.mjs` file with the theme configuration.
+
+3. **Customization** - Customize the theme to match your brand.
+
+   You can modify colors, fonts, and other styling options.
+
+</Steps>
+````
+
+<Steps>
+
+1. **Installation** - Install the theme package.
+
+   ```bash
+   npm install @six/starlight-theme
+   ```
+
+   This will add the theme to your project dependencies.
+
+2. **Configuration** - Add the theme to your configuration.
+
+   Update your `astro.config.mjs` file with the theme configuration.
+
+3. **Customization** - Customize the theme to match your brand.
+
+   You can modify colors, fonts, and other styling options.
+
+</Steps>
+
+## Complex Nested Steps
+
+For complex processes, you can create multiple levels of nesting.
+
+````jsx
+<Steps>
+
+1. **Phase 1: Setup**
+
+   <Steps>
+
+   1. Install dependencies
+   2. Configure environment
+   3. Set up development tools
+
+   </Steps>
+
+2. **Phase 2: Implementation**
+
+   <Steps>
+
+   1. Create components
+   2. Add styling
+   3. Implement functionality
+
+   </Steps>
+
+3. **Phase 3: Testing**
+
+   <Steps>
+
+   1. Unit tests
+   2. Integration tests
+   3. End-to-end tests
+
+   </Steps>
+
+</Steps>
+````
+
+<Steps>
+
+1. **Phase 1: Setup**
+
+   <Steps>
+
+   1. Install dependencies
+   2. Configure environment
+   3. Set up development tools
+
+   </Steps>
+
+2. **Phase 2: Implementation**
+
+   <Steps>
+
+   1. Create components
+   2. Add styling
+   3. Implement functionality
+
+   </Steps>
+
+3. **Phase 3: Testing**
+
+   <Steps>
+
+   1. Unit tests
+   2. Integration tests
+   3. End-to-end tests
+
+   </Steps>
+
+</Steps>
+
+# Best Practices
+----
+
+- Use steps for truly sequential processes where order matters
+- Keep each step focused on a single action or concept
+- Use clear, actionable language in step descriptions
+- Include code examples when relevant to the step
+- Use nested steps for complex processes with sub-tasks
+- Test your steps on different devices to ensure readability
+- Keep the total number of main steps reasonable (typically 3-10 steps)
+
+# What to Avoid
+----
+
+- **Don't use steps for non-sequential content** - Use regular headings or lists instead
+- **Don't create too many nested levels** - Keep nesting to 2-3 levels maximum
+- **Don't use steps for navigation** - Use proper navigation components
+- **Don't hide essential information in steps** - Critical details should be clearly visible
+- **Don't create overly complex step hierarchies** - Keep the structure simple and logical
+- **Don't use steps without clear purpose** - Each step should advance the process meaningfully
+- **Don't mix different step numbering systems** - Let the component handle numbering automatically

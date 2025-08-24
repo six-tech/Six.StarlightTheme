@@ -1,0 +1,154 @@
+---
+title: Badges
+description: Learn how to use the Badge component from Starlight to display status indicators, version numbers, and labels with different variants and sizes.
+---
+
+# Introduction
+
+The Badge component is used to display short pieces of information such as status indicators, version numbers, labels, or tags. It provides visual emphasis for important metadata and helps categorize content. The Badge component supports different variants, sizes, and styling options to fit various use cases.
+
+
+## Props
+
+| Prop Name | Prop Type | Description |
+|-----------|-----------|-------------|
+| `text` | `string` | The text content to display in the badge |
+| `variant` | `'tip' \| 'caution' \| 'note' \| 'success' \| 'danger'` | The variant that determines the badge's color and styling |
+| `size` | `'small' \| 'medium' \| 'large'` | The size of the badge (optional, defaults to medium) |
+
+
+
+# Basic Badge Usage
+
+The simplest form of badges using the Badge component from Starlight.
+
+import { Badge } from '@astrojs/starlight/components'
+
+<Badge text="New" variant="tip" size="small" />
+<Badge text="Deprecated" variant="caution" size="medium" />
+<Badge text="Six" variant="note" size="large" />
+<Badge text="200" variant="success" />
+<Badge text="Experimental" variant="danger" />
+
+
+# Badge Variants
+----
+
+The Badge component supports different variants that convey different meanings:
+
+## Tip Variant
+```
+<Badge text="New Feature" variant="tip" />
+```
+
+<Badge text="New Feature" variant="tip" />
+
+## Caution Variant
+```
+<Badge text="Deprecated" variant="caution" />
+```
+
+<Badge text="Deprecated" variant="caution" />
+
+## Note Variant
+```
+<Badge text="Information" variant="note" />
+```
+
+<Badge text="Information" variant="note" />
+
+## Success Variant
+```
+<Badge text="Stable" variant="success" />
+```
+
+<Badge text="Stable" variant="success" />
+
+## Danger Variant
+```
+<Badge text="Breaking Change" variant="danger" />
+```
+
+<Badge text="Breaking Change" variant="danger" />
+
+
+# Badge Sizes
+----
+
+Badges come in different sizes to fit various contexts:
+
+## Small Size
+```
+<Badge text="Small" variant="tip" size="small" />
+```
+
+<Badge text="Small" variant="tip" size="small" />
+
+## Medium Size (Default)
+```
+<Badge text="Medium" variant="tip" size="medium" />
+```
+
+<Badge text="Medium" variant="tip" size="medium" />
+
+## Large Size
+```
+<Badge text="Large" variant="tip" size="large" />
+```
+
+<Badge text="Large" variant="tip" size="large" />
+
+
+# Advanced Usage
+
+## Badges in Context
+
+Badges work well when used alongside other content to provide additional context:
+
+```
+**API Endpoint** <Badge text="v2.0" variant="success" /> - Current stable version
+
+**Legacy Feature** <Badge text="Deprecated" variant="caution" /> - Will be removed in v3.0
+
+**Experimental** <Badge text="Beta" variant="danger" /> - Use with caution
+```
+
+**API Endpoint** <Badge text="v2.0" variant="success" /> - Current stable version
+
+**Legacy Feature** <Badge text="Deprecated" variant="caution" /> - Will be removed in v3.0
+
+**Experimental** <Badge text="Beta" variant="danger" /> - Use with caution
+
+## Multiple Badges
+
+You can use multiple badges together to show different types of information:
+
+```
+<Badge text="v1.2.0" variant="success" />
+<Badge text="Stable" variant="tip" />
+<Badge text="TypeScript" variant="note" />
+```
+
+<Badge text="v1.2.0" variant="success" />
+<Badge text="Stable" variant="tip" />
+<Badge text="TypeScript" variant="note" />
+
+# Best Practices
+----
+
+- Use badges to highlight important status information
+- Choose appropriate variants that match the semantic meaning
+- Keep badge text short and descriptive
+- Use consistent badge variants across similar content types
+- Consider the size context when choosing badge sizes
+- Don't overuse badges as they can create visual clutter
+
+# What to Avoid
+----
+
+- **Don't use badges for navigation** - Use proper navigation components instead
+- **Don't make badge text too long** - Keep it concise and scannable
+- **Don't use badges without clear purpose** - Each badge should provide valuable information
+- **Don't mix different badge styles inconsistently** - Maintain visual consistency
+- **Don't use badges for essential information** - Important content should be in the main text
+- **Don't create custom badge variants** - Stick to the provided variants for consistency

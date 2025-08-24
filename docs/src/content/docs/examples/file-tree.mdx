@@ -1,0 +1,323 @@
+---
+title: File Tree
+description: Learn how to use the FileTree component from Starlight to display directory structures and project organization in your documentation.
+---
+
+# Introduction
+
+The FileTree component is used to display directory structures and project organization in a clean, hierarchical format. It helps developers understand project layouts, file relationships, and folder structures. The component supports nested directories, file highlighting, and descriptive annotations.
+
+## Props
+
+The FileTree component doesn't accept traditional props - it uses its children (the list items) to define the structure.
+
+| Element | Description |
+|---------|-------------|
+| `<FileTree>` | The wrapper component that creates the file tree structure |
+| List items (`-`) | Represent files and directories in the tree |
+| Nested lists | Create subdirectories and nested structures |
+| **Bold text** | Highlight important files or add emphasis |
+| Regular text | Add descriptions or annotations to files |
+
+# Basic File Tree
+----
+
+The simplest form of file tree displays a basic directory structure using the FileTree component from Starlight.
+
+import { FileTree } from '@astrojs/starlight/components'
+
+## Simple Structure
+
+```jsx
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+```
+
+<FileTree>
+
+- astro.config.mjs an **important** file
+- package.json
+- README.md
+- src
+  - components
+    - **Header.astro**
+  - …
+- pages/
+
+</FileTree>
+
+# Project Structure Examples
+----
+
+## Project Structure with Descriptions
+
+```jsx
+<FileTree>
+
+- astro.config.mjs **Main configuration file**
+- package.json
+- README.md
+- src **Source code directory**
+  - components **Reusable components**
+    - Header.astro
+    - Footer.astro
+    - **Navigation.astro** important component
+  - pages **Page components**
+    - index.astro
+    - about.astro
+  - styles **CSS and styling files**
+    - global.css
+    - components.css
+- public **Static assets**
+  - images/
+  - favicon.ico
+
+</FileTree>
+```
+
+<FileTree>
+
+- astro.config.mjs **Main configuration file**
+- package.json
+- README.md
+- src **Source code directory**
+  - components **Reusable components**
+    - Header.astro
+    - Footer.astro
+    - **Navigation.astro** important component
+  - pages **Page components**
+    - index.astro
+    - about.astro
+  - styles **CSS and styling files**
+    - global.css
+    - components.css
+- public **Static assets**
+  - images/
+  - favicon.ico
+
+</FileTree>
+
+## Nested Structure
+
+```jsx
+<FileTree>
+
+- docs
+  - src
+    - content
+      - docs
+        - **getting-started.md** start here
+        - examples
+          - components.mdx
+          - styling.mdx
+        - guides
+          - installation.md
+          - configuration.md
+    - components
+      - Header.astro
+      - Footer.astro
+  - astro.config.mjs
+  - package.json
+
+</FileTree>
+```
+
+<FileTree>
+
+- docs
+  - src
+    - content
+      - docs
+        - **getting-started.md** start here
+        - examples
+          - components.mdx
+          - styling.mdx
+        - guides
+          - installation.md
+          - configuration.md
+    - components
+      - Header.astro
+      - Footer.astro
+  - astro.config.mjs
+  - package.json
+
+</FileTree>
+
+# Advanced Usage
+----
+
+## Highlighting Important Files
+
+Use **bold text** to highlight important files in your file tree.
+
+```jsx
+<FileTree>
+
+- **astro.config.mjs** main configuration
+- package.json
+- src
+  - **index.astro** entry point
+  - components
+    - Header.astro
+    - **Button.astro** reusable component
+
+</FileTree>
+```
+
+<FileTree>
+
+- **astro.config.mjs** main configuration
+- package.json
+- src
+  - **index.astro** entry point
+  - components
+    - Header.astro
+    - **Button.astro** reusable component
+
+</FileTree>
+
+## File Descriptions
+
+Add descriptions to files to explain their purpose.
+
+```jsx
+<FileTree>
+
+- astro.config.mjs configuration for Astro
+- package.json project dependencies
+- src main source directory
+  - components reusable UI components
+    - Header.astro site header component
+  - pages page routes
+    - index.astro homepage
+
+</FileTree>
+```
+
+<FileTree>
+
+- astro.config.mjs configuration for Astro
+- package.json project dependencies
+- src main source directory
+  - components reusable UI components
+    - Header.astro site header component
+  - pages page routes
+    - index.astro homepage
+
+</FileTree>
+
+## Truncated Directories
+
+Use `…` to indicate that a directory contains more files than shown.
+
+```jsx
+<FileTree>
+
+- src
+  - components
+    - Header.astro
+    - Footer.astro
+    - …
+  - pages
+    - index.astro
+    - …
+
+</FileTree>
+```
+
+<FileTree>
+
+- src
+  - components
+    - Header.astro
+    - Footer.astro
+    - …
+  - pages
+    - index.astro
+    - …
+
+</FileTree>
+
+## Complex Project Structure
+
+```jsx
+<FileTree>
+
+- src
+  - components
+    - ui **Basic UI components**
+      - Button.astro
+      - Input.astro
+      - Modal.astro
+    - layout **Layout components**
+      - Header.astro
+      - Footer.astro
+      - Sidebar.astro
+    - content **Content components**
+      - Card.astro
+      - Hero.astro
+      - **Tabs.astro** interactive component
+  - styles
+    - base.css **Base styles and resets**
+    - components.css **Component styles**
+    - theme.css **Theme variables**
+  - **index.ts** component exports
+
+</FileTree>
+```
+
+<FileTree>
+
+- src
+  - components
+    - ui **Basic UI components**
+      - Button.astro
+      - Input.astro
+      - Modal.astro
+    - layout **Layout components**
+      - Header.astro
+      - Footer.astro
+      - Sidebar.astro
+    - content **Content components**
+      - Card.astro
+      - Hero.astro
+      - **Tabs.astro** interactive component
+  - styles
+    - base.css **Base styles and resets**
+    - components.css **Component styles**
+    - theme.css **Theme variables**
+  - **index.ts** component exports
+
+</FileTree>
+
+# Best Practices
+----
+
+- Use file trees to explain project structure and organization
+- Highlight important files with bold text
+- Add descriptive text to explain file purposes
+- Use consistent indentation for nested directories
+- Keep file trees focused on relevant files
+- Use `…` to indicate truncated directories when appropriate
+- Test file trees for readability on different screen sizes
+
+# What to Avoid
+----
+
+- **Don't include every file** - Focus on important files and structure
+- **Don't create overly deep nesting** - Keep hierarchies manageable
+- **Don't use file trees for navigation** - Use proper navigation components
+- **Don't make descriptions too long** - Keep annotations concise
+- **Don't create inconsistent indentation** - Maintain proper hierarchy
+- **Don't use file trees without context** - Always explain the purpose
+- **Don't forget to update file trees** - Keep them current with actual project structure

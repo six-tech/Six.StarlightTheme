@@ -1,0 +1,218 @@
+---
+title: Asides
+description: Learn how to use asides to display important information, tips, warnings, and notes in your documentation with different types and styling options.
+---
+
+# Introduction
+
+Asides are callout components that help highlight important information, tips, warnings, and notes in your documentation. They provide visual emphasis and help readers quickly identify different types of content. The Six Starlight Theme supports both markdown-based asides and component-based asides with consistent styling.
+
+## Props
+
+| Prop Name  | Prop Type                                  | Description                                                           |
+|------------|--------------------------------------------|-----------------------------------------------------------------------|
+| `type`     | `'note' \| 'tip' \| 'caution' \| 'danger'` | The type of aside to display. Determines the visual styling and icon. |
+| `children` | `ReactNode`                                | The content to display inside the aside.                              |
+
+# Markdown Asides
+----
+
+Markdown asides use the `:::type` syntax and are perfect for simple content that doesn't require complex formatting.
+
+## Note Aside
+
+```
+:::note
+This is a note aside that provides general information or context to the reader.
+:::
+```
+
+:::note
+
+This is a note aside that provides general information or context to the reader.
+
+:::
+
+## Tip Aside
+
+```
+:::tip
+This is a tip aside that offers helpful advice or best practices.
+:::
+```
+
+:::tip
+
+This is a tip aside that offers helpful advice or best practices.
+
+:::
+
+## Caution Aside
+
+```
+:::caution
+This is a caution aside that warns about potential issues or important considerations.
+:::
+```
+
+:::caution
+
+This is a caution aside that warns about potential issues or important considerations.
+
+:::
+
+## Danger Aside
+
+```
+:::danger
+This is a danger aside that highlights critical warnings or potential problems.
+:::
+```
+
+:::danger
+
+This is a danger aside that highlights critical warnings or potential problems.
+
+:::
+
+# Component Asides
+----
+
+For more complex content or when you need programmatic control, you can use the `Aside` component from Starlight.
+
+import { Aside } from '@astrojs/starlight/components'
+
+## Basic Aside
+
+```jsx
+<Aside>
+  This is a basic aside component that displays information without any specific type styling.
+</Aside>
+```
+
+<Aside>
+  This is a basic aside component that displays information without any specific type styling.
+</Aside>
+
+## Note Type
+
+```jsx
+<Aside type="note">
+  This aside uses the note type for general information.
+</Aside>
+```
+
+<Aside type="note">
+  This aside uses the note type for general information.
+</Aside>
+
+## Tip Type
+
+```jsx
+<Aside type="tip">
+  This aside uses the tip type for helpful advice.
+</Aside>
+```
+
+<Aside type="tip">
+  This aside uses the tip type for helpful advice.
+</Aside>
+
+## Caution Type
+
+```jsx
+<Aside type="caution">
+  This aside uses the caution type for warnings.
+</Aside>
+```
+
+<Aside type="caution">
+  This aside uses the caution type for warnings.
+</Aside>
+
+## Danger Type
+
+```jsx
+<Aside type="danger">
+  This aside uses the danger type for critical information.
+</Aside>
+```
+
+<Aside type="danger">
+  This aside uses the danger type for critical information.
+</Aside>
+
+# Advanced Usage
+----
+
+## Asides with Rich Content
+
+Asides can contain various types of content including code blocks, tables, and other markdown elements.
+
+```
+:::note
+**Code Example:**
+```js
+const example = 'This is a code block inside an aside'
+console.log(example)
+```
+
+**Table Example:**
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Markdown | ✅ | Full markdown support |
+| Code blocks | ✅ | Syntax highlighting |
+| Tables | ✅ | Responsive design |
+
+**Interactive Elements:**
+<details>
+<summary>Click to expand</summary>
+This is a collapsible section within an aside that can contain additional information.
+</details>
+:::
+```
+
+:::note
+
+**Code Example:**
+```js
+const example = 'This is a code block inside an aside'
+console.log(example)
+```
+
+**Table Example:**
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Markdown | ✅ | Full markdown support |
+| Code blocks | ✅ | Syntax highlighting |
+| Tables | ✅ | Responsive design |
+
+**Interactive Elements:**
+<details>
+<summary>Click to expand</summary>
+
+This is a collapsible section within an aside that can contain additional information.
+
+</details>
+
+:::
+
+# Best Practices
+----
+
+- Use **note** for general information and context
+- Use **tip** for helpful advice and best practices  
+- Use **caution** for warnings about potential issues
+- Use **danger** for critical warnings and potential problems
+- Keep aside content concise and focused
+- Use asides sparingly to avoid overwhelming the reader
+- Ensure the content inside asides is relevant and valuable
+
+# What to Avoid
+----
+
+- **Don't overuse asides** - Too many asides can make content harder to read
+- **Don't put essential information only in asides** - Important content should be in the main text
+- **Don't use asides for navigation** - Use proper navigation components instead
+- **Don't nest asides** - This can create confusing visual hierarchies
+- **Don't use asides for decorative purposes** - They should always serve a functional purpose

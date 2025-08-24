@@ -1,0 +1,100 @@
+@layer six {
+  :root:root {
+    --sl-font: 'Inter', sans-serif;
+    --sl-font-mono: 'JetBrains Mono', monospace;
+
+    --radius: 0.5rem;
+
+    --sl-color-text-accent: var(--primary);
+    --sl-color-banner-text: var(--foreground);
+  }
+
+  :root[data-theme='dark'] {
+    --sl-color-banner-bg: oklch(0.28 0.09 268);
+    --sl-color-banner-border: oklch(0.38 0.14 266);
+
+    --background: #070a12;
+    --foreground: #b9bdc3;
+    --foreground-light: #f9fafb;
+    --card: #0a101a;
+    --card-foreground: --foreground;
+    --popover: #1f2937;
+    --popover-foreground: #d1d5db;
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: #111827;
+    --muted-foreground: #9ca3af;
+    --accent: #1f2937;
+    --accent-foreground: #f9fafb;
+    --destructive: #ef4444;
+    --border: rgba(204, 235, 255, 0.15);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --mark-background: oklch(0.37 0.01 286);
+
+    /* Asides */
+    /** Note */
+    --sl-color-blue: #60a5fa;
+    --sl-color-blue-low: #1e40af;
+    --sl-color-blue-high: #bfdbfe;
+
+    /** Tip */
+    --sl-color-purple: #a855f7;
+    --sl-color-purple-low: #581c87;
+    --sl-color-purple-high: #d8b4fe;
+
+    /** Caution */
+    --sl-color-orange: #e0ab65;
+    --sl-color-orange-low: #f97316;
+    --sl-color-orange-high: #fef3c7;
+
+    /** Danger */
+    --sl-color-red: #f87171;
+    --sl-color-red-low: #991b1b;
+    --sl-color-red-high: #fca5a5;
+
+    /** Success */
+    --sl-color-green: #4ade80;
+    --sl-color-green-low: #166534;
+    --sl-color-green-high: #bbf7d0;
+    /** Banner */
+    --sl-color-banner-text: #bfdbfe;
+    --sl-color-banner-bg: #1e40af;
+
+    /** Code */
+    --code-background: #1f2937;
+    --ec-frm-edActTabBg: #212629;
+    --ec-frm-edTabBarBg: #0d1117;
+
+    --sl-color-bg-inline-code: #2a313d;
+  }
+
+  :root[data-theme='light'] {
+    --sl-color-banner-bg: oklch(0.97 0.01 255);
+    --sl-color-banner-border: oklch(0.55 0.22 263);
+
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.482 0 89.876);
+    --foreground-light: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --code-background: oklch(0.97 0 286);
+    --mark-background: oklch(0.92 0 286);
+  }
+}

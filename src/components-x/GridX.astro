@@ -1,0 +1,158 @@
+---
+interface Props {
+  cols?: number
+  gap?: string
+  vgap?: string
+  hgap?: string
+}
+
+const { cols = 12, gap, vgap, hgap } = Astro.props
+
+// Validate cols is between 1 and 12
+const validCols = Math.min(Math.max(1, cols), 12)
+
+// Calculate gap values
+const verticalGap = vgap || gap || '1rem'
+const horizontalGap = hgap || gap || '1rem'
+
+// Check which slots have content
+const hasCol1 = Astro.slots.has('col1')
+const hasCol2 = Astro.slots.has('col2')
+const hasCol3 = Astro.slots.has('col3')
+const hasCol4 = Astro.slots.has('col4')
+const hasCol5 = Astro.slots.has('col5')
+const hasCol6 = Astro.slots.has('col6')
+const hasCol7 = Astro.slots.has('col7')
+const hasCol8 = Astro.slots.has('col8')
+const hasCol9 = Astro.slots.has('col9')
+const hasCol10 = Astro.slots.has('col10')
+const hasCol11 = Astro.slots.has('col11')
+const hasCol12 = Astro.slots.has('col12')
+---
+
+<div class="six-cols" style={`--cols: ${validCols}; --vgap: ${verticalGap}; --hgap: ${horizontalGap};`}>
+  {
+    hasCol1 && (
+      <div class="six-cols-item" data-col="1">
+        <slot name="col1" />
+      </div>
+    )
+  }
+  {
+    hasCol2 && (
+      <div class="six-cols-item" data-col="2">
+        <slot name="col2" />
+      </div>
+    )
+  }
+  {
+    hasCol3 && (
+      <div class="six-cols-item" data-col="3">
+        <slot name="col3" />
+      </div>
+    )
+  }
+  {
+    hasCol4 && (
+      <div class="six-cols-item" data-col="4">
+        <slot name="col4" />
+      </div>
+    )
+  }
+  {
+    hasCol5 && (
+      <div class="six-cols-item" data-col="5">
+        <slot name="col5" />
+      </div>
+    )
+  }
+  {
+    hasCol6 && (
+      <div class="six-cols-item" data-col="6">
+        <slot name="col6" />
+      </div>
+    )
+  }
+  {
+    hasCol7 && (
+      <div class="six-cols-item" data-col="7">
+        <slot name="col7" />
+      </div>
+    )
+  }
+  {
+    hasCol8 && (
+      <div class="six-cols-item" data-col="8">
+        <slot name="col8" />
+      </div>
+    )
+  }
+  {
+    hasCol9 && (
+      <div class="six-cols-item" data-col="9">
+        <slot name="col9" />
+      </div>
+    )
+  }
+  {
+    hasCol10 && (
+      <div class="six-cols-item" data-col="10">
+        <slot name="col10" />
+      </div>
+    )
+  }
+  {
+    hasCol11 && (
+      <div class="six-cols-item" data-col="11">
+        <slot name="col11" />
+      </div>
+    )
+  }
+  {
+    hasCol12 && (
+      <div class="six-cols-item" data-col="12">
+        <slot name="col12" />
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .six-cols {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    gap: var(--vgap) var(--hgap);
+    width: 100%;
+  }
+
+  .six-cols-item {
+    min-width: 0; /* Prevent grid blowout */
+    margin: 0 !important;
+  }
+
+  /* Responsive: Stack columns on mobile devices */
+  @media (max-width: 767px) {
+    .six-cols {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Tablet: Show half the columns */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .six-cols {
+      grid-template-columns: repeat(min(var(--cols), 2), 1fr);
+    }
+  }
+
+  /* Small desktop: Show 2/3 of columns if more than 6 */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .six-cols[style*='--cols: 7'],
+    .six-cols[style*='--cols: 8'],
+    .six-cols[style*='--cols: 9'],
+    .six-cols[style*='--cols: 10'],
+    .six-cols[style*='--cols: 11'],
+    .six-cols[style*='--cols: 12'] {
+      grid-template-columns: repeat(min(var(--cols), 4), 1fr);
+    }
+  }
+</style>

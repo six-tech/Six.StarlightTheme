@@ -1,0 +1,226 @@
+---
+title: FigmaX
+description: Learn how to use the FigmaX component to embed Figma designs, prototypes, and components with flexible sizing and responsive behavior.
+---
+
+import FigmaX from '@six-theme/components-x/FigmaX.astro';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { GridX } from 'starlight-theme-six/components';
+
+# Introduction
+
+The FigmaX component provides an easy way to embed Figma designs, prototypes, and components directly in your documentation with flexible sizing options and responsive behavior. It supports custom dimensions, lazy loading, and automatically adapts to different screen sizes and themes.
+
+----
+
+## Props
+
+| Prop Name | Prop Type | Description | Default |
+|-----------|-----------|-------------|---------|
+| `url` | `string` | The Figma embed URL (required) | - |
+| `width` | `string` | Width of the embed (CSS units) | `"100%"` |
+| `height` | `string` | Height of the embed (CSS units) | `"450px"` |
+
+----
+
+# Basic Usage
+
+The simplest way to embed a Figma design is to provide the embed URL.
+
+## Getting the Embed URL
+
+To get the proper embed URL from Figma:
+
+1. Open your Figma file, prototype, or component
+2. Click the "Share" button in the top right
+3. Click "Get embed code"
+4. Copy the URL from the `src` attribute of the iframe code
+
+## Simple Embed
+
+``` astro
+<FigmaX url="https://www.figma.com/embed?embed_host=share&url=YOUR_FIGMA_URL" />
+```
+
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FHiNQ0kmWACSgJXt7XT8VxK%2FPhosphor-Icons--Community-%3Fnode-id%3D8899-89934%26p%3Df%26t%3Dipg3EcXoAAFFalBP-0"
+/>
+
+----
+
+# Sizing Options
+
+The FigmaX component supports various sizing options using standard CSS units.
+
+## Fixed Dimensions
+
+``` astro
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=..." 
+  width="800px"
+  height="600px"
+/>
+```
+
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FHiNQ0kmWACSgJXt7XT8VxK%2FPhosphor-Icons--Community-%3Fnode-id%3D8899-89934%26p%3Df%26t%3Dipg3EcXoAAFFalBP-0"
+  width="800px"
+  height="500px"
+/>
+
+## Percentage Width
+
+``` astro
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=..." 
+  width="80%"
+  height="500px"
+/>
+```
+
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FHiNQ0kmWACSgJXt7XT8VxK%2FPhosphor-Icons--Community-%3Fnode-id%3D8899-89934%26p%3Df%26t%3Dipg3EcXoAAFFalBP-0"
+  width="80%"
+  height="400px"
+/>
+
+## Viewport Units
+
+``` astro
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=..." 
+  width="90vw"
+  height="70vh"
+/>
+```
+
+## Rem Units
+
+``` astro
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=..." 
+  width="100%"
+  height="30rem"
+/>
+```
+
+----
+
+# Advanced Usage
+
+## Mobile Prototype Preview
+
+For mobile prototypes, use appropriate dimensions:
+
+``` astro
+<div style="max-width: 375px; margin: 0 auto;">
+  <FigmaX 
+    url="https://www.figma.com/embed?embed_host=share&url=..." 
+    width="100%"
+    height="812px"
+  />
+</div>
+```
+
+## Side-by-Side Designs
+
+Compare multiple designs using the GridX component:
+
+``` astro
+<GridX cols={2} gap="1rem">
+  <FigmaX 
+    slot="col1"
+    url="https://www.figma.com/embed?embed_host=share&url=..." 
+    height="400px"
+  />
+  <FigmaX 
+    slot="col2"
+    url="https://www.figma.com/embed?embed_host=share&url=..." 
+    height="400px"
+  />
+</GridX>
+```
+
+## Responsive Embed
+
+For responsive behavior, use percentage widths and viewport units:
+
+``` astro
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=..." 
+  width="100%"
+  height="min(70vh, 600px)"
+/>
+```
+
+----
+
+# Embed Types
+
+The FigmaX component supports various types of Figma content:
+
+## Design Files
+
+Embed complete design files or specific frames:
+
+``` astro
+<FigmaX url="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/..." />
+```
+
+## Interactive Prototypes
+
+Embed prototypes with transitions and interactions:
+
+``` astro
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/..." 
+  width="375px"
+  height="812px"
+/>
+```
+
+## Design System Components
+
+Showcase individual components from your design system:
+
+``` astro
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=..." 
+  width="100%"
+  height="400px"
+/>
+```
+
+## FigJam Boards
+
+Embed collaborative whiteboard content:
+
+``` astro
+<FigmaX 
+  url="https://www.figma.com/embed?embed_host=share&url=..." 
+  width="100%"
+  height="600px"
+/>
+```
+
+----
+
+# Best Practices
+
+- Use appropriate dimensions based on your content type (mobile prototypes vs. desktop designs)
+- Test embed URLs to ensure they work correctly and have proper permissions
+- Consider using percentage widths for responsive behavior
+- Use viewport units for full-screen experiences when appropriate
+- Provide meaningful context around embedded designs
+- Ensure Figma files have proper sharing permissions for embedding
+
+----
+
+# What to Avoid
+
+- **Don't use regular Figma share URLs** - Always use the embed URL from "Get embed code"
+- **Don't embed private files without proper permissions** - Ensure files are accessible to your audience
+- **Don't use fixed pixel dimensions for responsive layouts** - Use percentages or viewport units instead
+- **Don't embed too many large files on one page** - This can impact performance
+- **Don't forget to test embeds** - URLs can change if files are moved or permissions change
+- **Don't use extremely large dimensions** - Consider your users' screen sizes and bandwidth

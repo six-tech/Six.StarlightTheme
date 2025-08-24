@@ -1,0 +1,32 @@
+---
+import type { MarkdownHeading } from 'astro'
+
+interface TocItem extends MarkdownHeading {
+  children: TocItem[]
+}
+
+interface Props {
+  toc: TocItem[]
+  depth?: number
+  isMobile?: boolean
+}
+
+const { toc, depth = 0 } = Astro.props
+
+// Filter out the first item if it's the page title (H1 with PAGE_TITLE_ID)
+// We only do this at the root level (depth = 0)
+const filteredToc = depth === 0 ? toc.slice(1) : toc
+---
+
+<ul>
+  {
+    filteredToc.map((heading) => (
+      <li>
+        <a href={'#' + heading.slug} style={`--depth: ${depth};`}>
+          {heading.text}
+        </a>
+        {heading.children.length > 0 && <Astro.self toc={heading.children} depth={depth + 1} />}
+      </li>
+    ))
+  }
+</ul>
