@@ -68,6 +68,7 @@ interface Props {
   py?: number | string
   mt?: string
   mb?: string
+  radius?: string
   image?: ImageConfig | ImageConfigWithThemes | BackgroundImageConfig | HtmlImageConfig
   actions?: ActionConfig[]
 }
@@ -81,6 +82,7 @@ const {
   gap,
   mt,
   mb,
+  radius,
   title: customTitle,
   tagline: customTagline,
   titleColor,
@@ -214,7 +216,10 @@ const { justifyContent, alignItems, textAlign } = getFlexboxClasses(contentPosit
   <div
     class="six-hero"
     class:list={{ 'six-hero-with-background': isBackgroundMode }}
-    style={isBackgroundMode ? heroStyle : ''}
+    style={`
+      ${isBackgroundMode ? heroStyle : ''};
+      ${radius ? `border-radius: ${radius};` : ''}
+    `}
   >
     {/* Background mode: Flexbox content positioning */}
     {
@@ -257,7 +262,13 @@ const { justifyContent, alignItems, textAlign } = getFlexboxClasses(contentPosit
     {/* Regular mode: Standard content flow */}
     {
       !isBackgroundMode && (
-        <div class="six-hero-content" style={`gap: ${gapValue};`}>
+        <div
+          class="six-hero-content"
+          style={`
+            gap: ${gapValue};
+            ${radius ? `border-radius: ${radius};` : ''}
+          `}
+        >
           {darkImage && <Image src={darkImage} {...imageAttrs} class:list={lightImage ? ['light:sl-hidden'] : []} />}
           {lightImage && <Image src={lightImage} {...imageAttrs} class="dark:sl-hidden" />}
           {rawHtml && <div class="six-hero-html sl-flex" set:html={rawHtml} />}

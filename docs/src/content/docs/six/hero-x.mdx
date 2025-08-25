@@ -26,6 +26,7 @@ The HeroX component is a custom hero component designed specifically for the Six
 | `py` | `number \| string` | Vertical padding | `"2rem"` |
 | `mt` | `string` | Margin-top (px, rem, em, vh, etc.) | - |
 | `mb` | `string` | Margin-bottom (px, rem, em, vh, etc.) | - |
+| `radius` | `string` | Border radius (px, rem, em, etc.) | - |
 | `image` | `object` | Image configuration object | - |
 | `actions` | `array` | Array of action button objects | - |
 
@@ -108,6 +109,52 @@ The HeroX component supports custom margin control to create proper spacing betw
   height="400px"
   mt="4rem"
   mb="2rem"
+  image={{
+    background: heroImage,
+    alt: "Hero background",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    contentPosition: "middle-center"
+  }}
+/>
+
+----
+
+# Border Radius Control
+
+The HeroX component supports custom border radius for rounded corners on the content container.
+
+## Basic Radius Usage
+
+``` astro
+<HeroX 
+  title="Hero with Rounded Corners"
+  tagline="Content with custom border radius"
+  radius="1rem"
+/>
+```
+
+## Radius with Background Images
+
+``` astro
+<HeroX 
+  title="Background Hero with Radius"
+  tagline="Rounded corners on background hero"
+  height="400px"
+  radius="2rem"
+  image={{
+    background: heroImage,
+    backgroundSize: "cover",
+    contentPosition: "middle-center"
+  }}
+/>
+```
+
+<HeroX 
+  title="Background Hero with Radius"
+  tagline="Rounded corners on background hero"
+  height="400px"
+  radius="2rem"
   image={{
     background: heroImage,
     alt: "Hero background",
@@ -406,6 +453,7 @@ editUrl: false
   py="2rem"
   mt="2rem"
   mb="4rem"
+  radius="1.5rem"
   titleColor="#ffffff"
   taglineColor="#e2e8f0"
   image={{
@@ -462,6 +510,7 @@ import heroImage from '../../assets/your-image.png'
   py="2rem"
   mt="1rem"
   mb="2rem"
+  radius="1rem"
   image={{
     background: heroImage,
     contentPosition: "bottom-left",
@@ -499,6 +548,8 @@ import heroImage from '../../assets/your-image.png'
 - Test different screen sizes to ensure content remains readable
 - Use margin props (`mt`, `mb`) to create proper spacing between components
 - Consider the relationship between padding (`px`, `py`) and margins (`mt`, `mb`) for optimal spacing
+- Use radius prop for subtle rounded corners that enhance visual appeal
+- Test radius values on different screen sizes to ensure consistent appearance
 
 ----
 
@@ -512,3 +563,4 @@ import heroImage from '../../assets/your-image.png'
 - **Don't use background images without proper fallbacks** - Provide appropriate fallback colors or images
 - **Don't position content where it might be cut off** - Consider safe areas for text placement
 - **Don't confuse padding with margins** - Padding controls internal spacing, margins control external spacing
+- **Don't use extremely large radius values** - Very large radius can create awkward visual shapes
