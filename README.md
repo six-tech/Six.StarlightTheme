@@ -28,7 +28,7 @@ it provides an elegant design that works seamlessly across all devices.
 1. **Install the theme and required fonts:**
 
    ```bash
-   pnpm install starlight-theme-six @fontsource/inter @fontsource/jetbrains-mono
+   pnpm install @six-tech/starlight-theme-six @fontsource/inter @fontsource/jetbrains-mono
    ```
 
 2. **Add to your Starlight configuration:**
