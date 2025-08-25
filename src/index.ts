@@ -6,7 +6,6 @@ import { StarlightThemeSixConfigSchema, type StarlightThemeSixUserConfig } from 
 import { overrideComponents } from './libs/starlight'
 import { vitePluginStarlightThemeSix } from './libs/vite'
 import translations from './translations'
-import { getFavIcons } from './utils/favicons'
 
 export default function starlightThemeSix(userConfig: StarlightThemeSixUserConfig): StarlightPlugin {
   const parsedConfig = StarlightThemeSixConfigSchema.safeParse(userConfig)
@@ -20,7 +19,7 @@ export default function starlightThemeSix(userConfig: StarlightThemeSixUserConfi
   return {
     name: 'starlight-theme-six-plugin',
     hooks: {
-      'config:setup': function ({ config: starlightConfig, logger, updateConfig, addIntegration, astroConfig }) {
+      'config:setup': function ({ config: starlightConfig, logger, updateConfig, addIntegration }) {
         const userExpressiveCodeConfig
           = starlightConfig.expressiveCode === false || starlightConfig.expressiveCode === true ? {} : starlightConfig.expressiveCode
 
@@ -41,12 +40,8 @@ export default function starlightThemeSix(userConfig: StarlightThemeSixUserConfi
           defaultConfig.title = 'Starlight Six'
         }
 
-        // Default head elements (only add favicons if user hasn't provided head elements)
-        if (starlightConfig.head === undefined || starlightConfig.head.length === 0) {
-          const basePath = astroConfig?.base || '/'
-          const defaultFavicons = getFavIcons({ basePath })
-          defaultConfig.head = defaultFavicons
-        }
+        // Note: Favicon defaults are not automatically applied to avoid base path conflicts
+        // Users should manually configure favicons using getFavIcons() utility if needed
 
         // Default lastUpdated (only if user hasn't set it)
         if (starlightConfig.lastUpdated === undefined) {

@@ -2,6 +2,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import starlight from '@astrojs/starlight'
 import starlightThemeSix from '@six-tech/starlight-theme-six'
+import { getFavIcons } from '@six-tech/starlight-theme-six/utils/favicons'
 
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
@@ -27,7 +28,9 @@ export default defineConfig({
         alt: 'Six Theme for Astro.js Starlight',
       },
       title: 'Starlight Six',
-
+      head: [
+        ...getFavIcons({ basePath: '/Six.StarlightTheme/' }),
+      ],
       lastUpdated: true,
       editLink: {
         baseUrl: 'https://github.com/six-tech/Six.StarlightTheme/edit/main/docs/',
@@ -93,7 +96,7 @@ export default defineConfig({
         },
       ],
       social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/six-tech/starlight-theme-six' },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/six-tech/Six.StarlightTheme' },
       ],
     }),
   ],

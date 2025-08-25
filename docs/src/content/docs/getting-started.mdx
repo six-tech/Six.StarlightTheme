@@ -50,11 +50,12 @@ import { Steps, Tabs, TabItem } from '@astrojs/starlight/components'
    The Six theme automatically provides sensible defaults for:
    - **Logo**: Six theme logos (dark/light variants)
    - **Title**: "Starlight Six" 
-   - **Favicons**: Complete favicon and manifest setup
    - **Last Updated**: Enabled by default
    - **Table of Contents**: Shows H1-H5 headings
    
    You can override any of these by providing your own values in the Starlight configuration.
+   
+   **Note:** Favicons are not automatically configured to avoid base path conflicts. Use the `getFavIcons()` utility for manual setup.
    :::
 
    ```diff lang="js"
@@ -119,6 +120,8 @@ export default defineConfig({
 You can override any default by providing your own values:
 
 ```js title="astro.config.mjs"
+import { getFavIcons } from '@six-tech/starlight-theme-six/utils/favicons'
+
 export default defineConfig({
   integrations: [
     starlight({
@@ -135,8 +138,9 @@ export default defineConfig({
         maxHeadingLevel: 4, // End at H4
       },
       head: [
-        // Your custom head elements
-        // (favicon defaults are still included automatically)
+        // Add favicon configuration manually
+        ...getFavIcons({ basePath: '/my-project/' }), // For subdirectory deployment
+        // Or for root deployment: ...getFavIcons()
       ],
     }),
   ],
