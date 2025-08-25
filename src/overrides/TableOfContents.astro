@@ -15,7 +15,109 @@ const { toc } = Astro.locals.starlightRoute
   )
 }
 
-<script src="../components/TableOfContents/starlight-toc"></script>
+<script>
+  // Simple TOC highlighting implementation
+  class SimpleStarlightTOC extends HTMLElement {
+    private currentLink: HTMLAnchorElement | null = null
+    private links: HTMLAnchorElement[] = []
+    private headings: HTMLHeadingElement[] = []
+
+    constructor() {
+      super()
+      this.init()
+    }
+
+    private init() {
+      // Get all TOC links
+      this.links = Array.from(this.querySelectorAll('a'))
+
+      // Get all headings that are in the TOC
+      this.headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).filter(
+        (h) => h.id && this.links.some((link) => link.hash === `#${h.id}`),
+      )
+
+      if (this.links.length === 0 || this.headings.length === 0) return
+
+      // Set up intersection observer
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              this.updateCurrentLink(entry.target.id)
+            }
+          })
+        },
+        {
+          rootMargin: '-20% 0px -80% 0px',
+          threshold: 0,
+        },
+      )
+
+      // Observe all headings
+      this.headings.forEach((heading) => observer.observe(heading))
+
+      // Set initial active link
+      this.setInitialActiveLink()
+
+      // Add scroll listener for better accuracy
+      window.addEventListener('scroll', () => {
+        requestAnimationFrame(() => this.updateOnScroll())
+      })
+    }
+
+    private updateCurrentLink(headingId: string) {
+      const link = this.links.find((link) => link.hash === `#${headingId}`)
+      if (link && link !== this.currentLink) {
+        if (this.currentLink) {
+          this.currentLink.removeAttribute('aria-current')
+        }
+        link.setAttribute('aria-current', 'true')
+        this.currentLink = link
+      }
+    }
+
+    private setInitialActiveLink() {
+      if (this.links.length > 0) {
+        this.currentLink = this.links[0]
+        this.currentLink.setAttribute('aria-current', 'true')
+      }
+    }
+
+    private updateOnScroll() {
+      const scrollY = window.scrollY
+      const windowHeight = window.innerHeight
+
+      // Find the heading that's currently most visible
+      let activeHeading = this.headings[0]
+      let maxVisibility = 0
+
+      for (const heading of this.headings) {
+        const rect = heading.getBoundingClientRect()
+        const headingTop = rect.top + scrollY
+        const headingBottom = headingTop + rect.height
+
+        // Calculate how much of the heading is visible
+        const visibleTop = Math.max(headingTop, scrollY)
+        const visibleBottom = Math.min(headingBottom, scrollY + windowHeight)
+        const visibility = Math.max(0, visibleBottom - visibleTop) / rect.height
+
+        if (visibility > maxVisibility) {
+          maxVisibility = visibility
+          activeHeading = heading
+        }
+      }
+
+      if (activeHeading) {
+        this.updateCurrentLink(activeHeading.id)
+      }
+    }
+  }
+
+  // Register the custom element
+  if (!customElements.get('starlight-toc')) {
+    customElements.define('starlight-toc', SimpleStarlightTOC)
+  }
+</script>
 
 <style>
   starlight-toc {
@@ -23,12 +125,20 @@ const { toc } = Astro.locals.starlightRoute
     scrollbar-width: thin;
     padding-bottom: 2.5rem;
     overflow: hidden;
-    scrollbar-gutter: stable both-edges; /* Reserves space on both sides */
+    scrollbar-gutter: stable both-edges;
     width: 300px;
     height: 100%;
   }
 
   starlight-toc:hover {
-    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-y: auto;
+  }
+
+  /* Style for active TOC links */
+  starlight-toc a[aria-current='true'] {
+    color: var(--accent-foreground) !important;
+    font-weight: 600;
+    border-left: 2px solid var(--accent-foreground) !important;
+    padding-left: 0.5rem;
   }
 </style>
