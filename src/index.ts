@@ -29,8 +29,8 @@ export default function starlightThemeSix(userConfig: StarlightThemeSixUserConfi
         // Default logo (only if user hasn't provided one)
         if (starlightConfig.logo === undefined) {
           defaultConfig.logo = {
-            dark: '@six-tech/starlight-theme-six/assets/six-logo-mini-mono-140-128-light.svg',
-            light: '@six-tech/starlight-theme-six/assets/six-logo-mini-mono-140-128-dark.svg',
+            dark: '@six-tech/starlight-theme-six/assets/six-logo-mini-gradient-140-128-light.png',
+            light: '@six-tech/starlight-theme-six/assets/six-logo-mini-gradient-140-128-light.png',
             alt: 'Six Theme for Astro.js Starlight',
           }
         }

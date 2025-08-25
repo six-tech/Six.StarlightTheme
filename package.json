@@ -1,7 +1,7 @@
 {
   "name": "@six-tech/starlight-theme-six",
   "type": "module",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "packageManager": "pnpm@9.14.4",
   "description": "Clean and modern Starlight theme by Six Technology",
   "author": "Six Technology",
@@ -48,6 +48,7 @@
     "./utils/favicons": "./src/utils/favicons.ts",
     "./assets/six-logo-mini-mono-140-128-dark.svg": "./src/assets/six-logo-mini-mono-140-128-dark.svg",
     "./assets/six-logo-mini-mono-140-128-light.svg": "./src/assets/six-logo-mini-mono-140-128-light.svg",
+    "./assets/six-logo-mini-gradient-140-128-light.png": "./src/assets/six-logo-mini-gradient-140-128-light.png",
     "./package.json": "./package.json"
   },
   "files": [
