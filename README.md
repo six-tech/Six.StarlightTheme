@@ -91,9 +91,9 @@ This theme is based on the excellent [Starlight Black Theme](https://github.com/
 
 <!-- Badges -->
 
-[npm-version-src]: https://img.shields.io/npm/v/starlight-theme-six?style=flat&colorA=080f12&colorB=1fa669
-[npm-version-href]: https://npmjs.com/package/starlight-theme-six
-[npm-downloads-src]: https://img.shields.io/npm/dm/starlight-theme-six?style=flat&colorA=080f12&colorB=1fa669
-[npm-downloads-href]: https://www.npmjs.com/package/starlight-theme-six
+[npm-version-src]: https://img.shields.io/npm/v/@six-tech/starlight-theme-six?style=flat&colorA=080f12&colorB=1fa669
+[npm-version-href]: https://www.npmjs.com/package/@six-tech/starlight-theme-six
+[npm-downloads-src]: https://img.shields.io/npm/dm/@six-tech/starlight-theme-six?style=flat&colorA=080f12&colorB=1fa669
+[npm-downloads-href]: https://www.npmjs.com/package/@six-tech/starlight-theme-six
 [license-src]: https://img.shields.io/github/license/six-tech/Six.StarlightTheme.svg?style=flat&colorA=080f12&colorB=1fa669
 [license-href]: https://github.com/six-tech/Six.StarlightTheme/blob/main/LICENSE
