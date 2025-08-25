@@ -66,6 +66,8 @@ interface Props {
   height?: number | string
   px?: number | string
   py?: number | string
+  mt?: string
+  mb?: string
   image?: ImageConfig | ImageConfigWithThemes | BackgroundImageConfig | HtmlImageConfig
   actions?: ActionConfig[]
 }
@@ -77,6 +79,8 @@ const {
   px,
   py,
   gap,
+  mt,
+  mb,
   title: customTitle,
   tagline: customTagline,
   titleColor,
@@ -206,7 +210,7 @@ const getFlexboxClasses = (position: ContentPosition) => {
 const { justifyContent, alignItems, textAlign } = getFlexboxClasses(contentPosition)
 ---
 
-<ContainerSectionX px={isBackgroundMode ? '0' : '1rem'} py={isBackgroundMode ? '0' : '1rem'}>
+<ContainerSectionX px={isBackgroundMode ? '0' : '1rem'} py={isBackgroundMode ? '0' : '1rem'} mt={mt} mb={mb}>
   <div
     class="six-hero"
     class:list={{ 'six-hero-with-background': isBackgroundMode }}

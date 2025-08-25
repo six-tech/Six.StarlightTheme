@@ -3,16 +3,25 @@ export interface Props {
   px?: string
   py?: string
   border?: boolean
+  mt?: string
+  mb?: string
 }
 
-const { px = '1rem', py = '1rem', border = false } = Astro.props
+const { px = '1rem', py = '1rem', border = false, mt, mb } = Astro.props
 ---
 
 <div class="container-section" style={border ? 'border: 1px solid var(--border)' : undefined}>
   <div class="container-wrapper">
     <div
       class="container"
-      style={`padding-left: ${px}; padding-right: ${px}; padding-top: ${py}; padding-bottom: ${py};`}
+      style={`
+        padding-left: ${px};
+        padding-right: ${px};
+        padding-top: ${py};
+        padding-bottom: ${py};
+        ${mt ? `margin-top: ${mt};` : ''}
+        ${mb ? `margin-bottom: ${mb};` : ''}
+      `}
     >
       <slot />
     </div>
