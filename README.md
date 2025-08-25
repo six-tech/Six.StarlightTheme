@@ -35,9 +35,9 @@ it provides an elegant design that works seamlessly across all devices.
 
    ```ts
    import starlight from '@astrojs/starlight'
+   import starlightThemeSix from '@six-tech/starlight-theme-six'
    // astro.config.ts
    import { defineConfig } from 'astro/config'
-   import starlightThemeSix from 'starlight-theme-six'
 
    export default defineConfig({
      integrations: [

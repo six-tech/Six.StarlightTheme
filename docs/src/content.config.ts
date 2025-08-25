@@ -1,7 +1,7 @@
 import { docsLoader } from '@astrojs/starlight/loaders'
 import { docsSchema } from '@astrojs/starlight/schema'
+import { ExtendDocsSchema } from '@six-tech/starlight-theme-six/schema'
 import { defineCollection } from 'astro:content'
-import { ExtendDocsSchema } from 'starlight-theme-six/schema'
 
 export const collections = {
   docs: defineCollection({

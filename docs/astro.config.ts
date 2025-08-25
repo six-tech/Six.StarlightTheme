@@ -1,10 +1,10 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import starlight from '@astrojs/starlight'
+import starlightThemeSix from '@six-tech/starlight-theme-six'
 import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'astro/config'
 
-import starlightThemeSix from 'starlight-theme-six'
+import { defineConfig } from 'astro/config'
 import { getFavIcons } from './config/favicons'
 import { devServerFileWatcher } from './config/integrations/dev-server-file-watcher'
 

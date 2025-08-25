@@ -9,15 +9,15 @@ export function overrideComponents(
   const components = { ...starlightConfig.components }
   for (const override of overrides) {
     if ((starlightConfig.components?.[override]) != null) {
-      const fallback = `starlight-theme-six/overrides/${override}.astro`
+      const fallback = `@six-tech/starlight-theme-six/overrides/${override}.astro`
 
       logger.warn(`A \`<${override}>\` component override is already defined in your Starlight configuration.`)
       logger.warn(
-        `To use \`starlight-theme-six\`, either remove this override or manually render the content from \`${fallback}\`.`,
+        `To use \`@six-tech/starlight-theme-six\`, either remove this override or manually render the content from \`${fallback}\`.`,
       )
       continue
     }
-    components[override] = `starlight-theme-six/overrides/${override}.astro`
+    components[override] = `@six-tech/starlight-theme-six/overrides/${override}.astro`
   }
 
   return components

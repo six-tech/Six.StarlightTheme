@@ -65,9 +65,9 @@ export default function starlightThemeSix(userConfig: StarlightThemeSixUserConfi
             '@fontsource/inter/700.css',
             '@fontsource/inter/800.css',
             '@fontsource/inter/900.css',
-            'starlight-theme-six/styles/layers',
-            'starlight-theme-six/styles/theme',
-            'starlight-theme-six/styles/base',
+            '@six-tech/starlight-theme-six/styles/layers',
+            '@six-tech/starlight-theme-six/styles/theme',
+            '@six-tech/starlight-theme-six/styles/base',
           ],
           expressiveCode:
             starlightConfig.expressiveCode === false
