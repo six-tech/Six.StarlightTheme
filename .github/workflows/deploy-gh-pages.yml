@@ -25,7 +25,7 @@ jobs:
         with:
           path: ./docs
           node-version: 20
-          # package-manager: pnpm@latest #  Automatically detected based on your lockfile. (optional)
+          package-manager: pnpm@latest #  Automatically detected based on your lockfile. (optional)
         # env:
         # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)
 
