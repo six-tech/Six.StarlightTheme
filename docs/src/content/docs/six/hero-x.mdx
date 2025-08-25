@@ -24,6 +24,8 @@ The HeroX component is a custom hero component designed specifically for the Six
 | `height` | `number \| string` | Height of hero container | `auto` (standard), `"60vh"` (background) |
 | `px` | `number \| string` | Horizontal padding | `"2rem"` |
 | `py` | `number \| string` | Vertical padding | `"2rem"` |
+| `mt` | `string` | Margin-top (px, rem, em, vh, etc.) | - |
+| `mb` | `string` | Margin-bottom (px, rem, em, vh, etc.) | - |
 | `image` | `object` | Image configuration object | - |
 | `actions` | `array` | Array of action button objects | - |
 
@@ -64,6 +66,55 @@ import { HeroX } from 'starlight-theme-six/components'
 <HeroX 
   title="Custom Hero Title"
   tagline="This overrides the frontmatter description"
+/>
+
+----
+
+# Margin Control
+
+The HeroX component supports custom margin control to create proper spacing between components.
+
+## Basic Margin Usage
+
+``` astro
+<HeroX 
+  title="Hero with Custom Margins"
+  tagline="Proper spacing from surrounding elements"
+  mt="2rem"
+  mb="3rem"
+/>
+```
+
+## Margin with Background Images
+
+``` astro
+<HeroX 
+  title="Background Hero with Margins"
+  tagline="Spaced from other page elements"
+  height="400px"
+  mt="4rem"
+  mb="2rem"
+  image={{
+    background: heroImage,
+    backgroundSize: "cover",
+    contentPosition: "middle-center"
+  }}
+/>
+```
+
+<HeroX 
+  title="Background Hero with Margins"
+  tagline="Spaced from other page elements"
+  height="400px"
+  mt="4rem"
+  mb="2rem"
+  image={{
+    background: heroImage,
+    alt: "Hero background",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    contentPosition: "middle-center"
+  }}
 />
 
 ----
@@ -353,6 +404,8 @@ editUrl: false
   height="80vh"
   px="3rem"
   py="2rem"
+  mt="2rem"
+  mb="4rem"
   titleColor="#ffffff"
   taglineColor="#e2e8f0"
   image={{
@@ -407,6 +460,8 @@ import heroImage from '../../assets/your-image.png'
   height="80vh"
   px="3rem"
   py="2rem"
+  mt="1rem"
+  mb="2rem"
   image={{
     background: heroImage,
     contentPosition: "bottom-left",
@@ -442,6 +497,8 @@ import heroImage from '../../assets/your-image.png'
 - Consider mobile responsiveness when setting heights and padding
 - Provide meaningful alt text for background images
 - Test different screen sizes to ensure content remains readable
+- Use margin props (`mt`, `mb`) to create proper spacing between components
+- Consider the relationship between padding (`px`, `py`) and margins (`mt`, `mb`) for optimal spacing
 
 ----
 
@@ -454,3 +511,4 @@ import heroImage from '../../assets/your-image.png'
 - **Don't ignore mobile experience** - Test on smaller screens and adjust accordingly
 - **Don't use background images without proper fallbacks** - Provide appropriate fallback colors or images
 - **Don't position content where it might be cut off** - Consider safe areas for text placement
+- **Don't confuse padding with margins** - Padding controls internal spacing, margins control external spacing
