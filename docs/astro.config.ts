@@ -2,7 +2,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import starlight from '@astrojs/starlight'
 import starlightThemeSix from '@six-tech/starlight-theme-six'
-import { getFavIcons } from '@six-tech/starlight-theme-six/utils/favicons'
+
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 import { devServerFileWatcher } from './config/integrations/dev-server-file-watcher'
@@ -27,9 +27,7 @@ export default defineConfig({
         alt: 'Six Theme for Astro.js Starlight',
       },
       title: 'Starlight Six',
-      head: [
-        ...getFavIcons({ basePath: '/Six.StarlightTheme/' }), // Inserts the favicons, apple icons and manifest.json into the <head> tag
-      ],
+
       lastUpdated: true,
       editLink: {
         baseUrl: 'https://github.com/six-tech/Six.StarlightTheme/edit/main/docs/',

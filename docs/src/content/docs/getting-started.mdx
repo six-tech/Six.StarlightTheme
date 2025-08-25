@@ -46,6 +46,17 @@ import { Steps, Tabs, TabItem } from '@astrojs/starlight/components'
 
 2. Configure the plugin in your Starlight [configuration](https://starlight.astro.build/reference/configuration/#plugins) in the `astro.config.mjs` file.
 
+   :::tip[Automatic Defaults]
+   The Six theme automatically provides sensible defaults for:
+   - **Logo**: Six theme logos (dark/light variants)
+   - **Title**: "Starlight Six" 
+   - **Favicons**: Complete favicon and manifest setup
+   - **Last Updated**: Enabled by default
+   - **Table of Contents**: Shows H1-H5 headings
+   
+   You can override any of these by providing your own values in the Starlight configuration.
+   :::
+
    ```diff lang="js"
    // astro.config.mjs
    import starlight from '@astrojs/starlight'
@@ -74,3 +85,60 @@ import { Steps, Tabs, TabItem } from '@astrojs/starlight/components'
 3. [Start the development server](https://starlight.astro.build/getting-started/#start-the-development-server) to preview the plugin in action.
 
 </Steps>
+
+That's it! You can now use the theme in your project. 🎉
+
+## Minimal Configuration
+
+With the automatic defaults, you can get started with just the plugin configuration:
+
+```js title="astro.config.mjs"
+import starlight from '@astrojs/starlight'
+import { defineConfig } from 'astro/config'
+import starlightThemeSix from '@six-tech/starlight-theme-six'
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      plugins: [
+        starlightThemeSix({
+          // Theme-specific options (all optional)
+          navLinks: [
+            { label: 'Docs', link: '/getting-started' },
+          ],
+        })
+      ],
+      // That's it! The theme provides defaults for logo, title, favicons, etc.
+    }),
+  ],
+})
+```
+
+## Overriding Defaults
+
+You can override any default by providing your own values:
+
+```js title="astro.config.mjs"
+export default defineConfig({
+  integrations: [
+    starlight({
+      plugins: [starlightThemeSix({ /* theme config */ })],
+      
+      // Override defaults
+      title: 'My Custom Title',
+      logo: {
+        src: './src/assets/my-logo.svg',
+      },
+      lastUpdated: false, // Disable last updated
+      tableOfContents: {
+        minHeadingLevel: 2, // Start from H2
+        maxHeadingLevel: 4, // End at H4
+      },
+      head: [
+        // Your custom head elements
+        // (favicon defaults are still included automatically)
+      ],
+    }),
+  ],
+})
+```

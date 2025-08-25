@@ -382,7 +382,7 @@
 
   /** Code Blocks */
   .sl-markdown-content .expressive-code {
-    margin-top: 1rem !important;
+    margin-top: 1.5rem !important;
     margin-bottom: 1.5rem !important;
   }
 
@@ -430,7 +430,7 @@
 
   /** Aside */
   .sl-markdown-content .starlight-aside {
-    margin: 0 0 1rem 0;
+    margin: 1.5rem 0 1.5rem 0;
     padding: 2rem;
     border: 0.125rem solid var(--sl-color-asides-border);
     border-radius: calc(var(--radius) * 1.5);

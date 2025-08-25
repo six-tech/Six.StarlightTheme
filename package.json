@@ -46,6 +46,8 @@
     "./overrides/TableOfContents.astro": "./src/overrides/TableOfContents.astro",
     "./overrides/PageSidebar.astro": "./src/overrides/PageSidebar.astro",
     "./utils/favicons": "./src/utils/favicons.ts",
+    "./assets/six-logo-mini-mono-140-128-dark.svg": "./src/assets/six-logo-mini-mono-140-128-dark.svg",
+    "./assets/six-logo-mini-mono-140-128-light.svg": "./src/assets/six-logo-mini-mono-140-128-light.svg",
     "./package.json": "./package.json"
   },
   "files": [

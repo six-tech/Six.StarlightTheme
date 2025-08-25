@@ -6,6 +6,7 @@ import { StarlightThemeSixConfigSchema, type StarlightThemeSixUserConfig } from 
 import { overrideComponents } from './libs/starlight'
 import { vitePluginStarlightThemeSix } from './libs/vite'
 import translations from './translations'
+import { getFavIcons } from './utils/favicons'
 
 export default function starlightThemeSix(userConfig: StarlightThemeSixUserConfig): StarlightPlugin {
   const parsedConfig = StarlightThemeSixConfigSchema.safeParse(userConfig)
@@ -19,11 +20,49 @@ export default function starlightThemeSix(userConfig: StarlightThemeSixUserConfi
   return {
     name: 'starlight-theme-six-plugin',
     hooks: {
-      'config:setup': function ({ config: starlightConfig, logger, updateConfig, addIntegration }) {
+      'config:setup': function ({ config: starlightConfig, logger, updateConfig, addIntegration, astroConfig }) {
         const userExpressiveCodeConfig
           = starlightConfig.expressiveCode === false || starlightConfig.expressiveCode === true ? {} : starlightConfig.expressiveCode
 
+        // Set up default configuration values
+        const defaultConfig: Partial<typeof starlightConfig> = {}
+
+        // Default logo (only if user hasn't provided one)
+        if (starlightConfig.logo === undefined) {
+          defaultConfig.logo = {
+            dark: '@six-tech/starlight-theme-six/assets/six-logo-mini-mono-140-128-light.svg',
+            light: '@six-tech/starlight-theme-six/assets/six-logo-mini-mono-140-128-dark.svg',
+            alt: 'Six Theme for Astro.js Starlight',
+          }
+        }
+
+        // Default title (only if user hasn't provided one)
+        if (starlightConfig.title === undefined || starlightConfig.title === 'My Docs') {
+          defaultConfig.title = 'Starlight Six'
+        }
+
+        // Default head elements (only add favicons if user hasn't provided head elements)
+        if (starlightConfig.head === undefined || starlightConfig.head.length === 0) {
+          const basePath = astroConfig?.base || '/'
+          const defaultFavicons = getFavIcons({ basePath })
+          defaultConfig.head = defaultFavicons
+        }
+
+        // Default lastUpdated (only if user hasn't set it)
+        if (starlightConfig.lastUpdated === undefined) {
+          defaultConfig.lastUpdated = true
+        }
+
+        // Default table of contents (only if user hasn't provided one)
+        if (starlightConfig.tableOfContents === undefined) {
+          defaultConfig.tableOfContents = {
+            minHeadingLevel: 1,
+            maxHeadingLevel: 5,
+          }
+        }
+
         updateConfig({
+          ...defaultConfig,
           components: overrideComponents(
             starlightConfig,
             [
