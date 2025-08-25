@@ -38,7 +38,8 @@ Import and use the `getFavIcons()` function in your Astro configuration:
 ``` ts title="docs/astro.config.ts"
 import starlight from '@astrojs/starlight'
 import { defineConfig } from 'astro/config'
-import { getFavIcons } from './config/head'
+import starlightThemeSix from '@six-tech/starlight-theme-six'
+import { getFavIcons } from '@six-tech/starlight-theme-six/utils/favicons'
 
 export default defineConfig({
   integrations: [
@@ -47,9 +48,15 @@ export default defineConfig({
       logo: {
         src: './src/assets/logo.svg',
       },
+      plugins: [
+        starlightThemeSix({
+          // theme configuration
+        })
+      ],
       // Add favicon configuration
       head: [
-        ...getFavIcons(),
+        ...getFavIcons(), // For root deployment
+        // Or for subdirectory: ...getFavIcons({ basePath: '/my-docs/' })
         // Add additional head elements here if needed
       ],
       // ... other configuration
@@ -133,13 +140,36 @@ Update the `background_color` and `theme_color` to match your site's design:
 
 # Advanced Configuration
 
-## Adding Custom Head Elements
+## Configuration Options
+
+The `getFavIcons()` function accepts optional configuration:
+
+``` ts title="docs/astro.config.ts"
+head: [
+  // Default configuration (root deployment)
+  ...getFavIcons(),
+  
+  // For subdirectory deployment (GitHub Pages, etc.)
+  ...getFavIcons({ basePath: '/my-project/' }),
+  
+  // Custom theme color
+  ...getFavIcons({ themeColor: '#your-brand-color' }),
+  
+  // Both options
+  ...getFavIcons({ 
+    basePath: '/my-docs/', 
+    themeColor: '#FF6B6B' 
+  }),
+],
+```
+
+## Adding Additional Head Elements
 
 You can extend the head configuration with additional elements:
 
-``` js title="docs/astro.config.ts"
+``` ts title="docs/astro.config.ts"
 head: [
-  ...getFavIcons(),
+  ...getFavIcons({ basePath: '/my-docs/' }),
   // Add custom meta tags
   {
     tag: 'meta',
@@ -157,74 +187,6 @@ head: [
     }
   }
 ],
-```
-
-## Customizing the getFavIcons Function
-
-If you need to modify the favicon configuration, you can edit the `getFavIcons()` function in `docs/config/head.ts`:
-
-```` jsx
-<Tabs>
-<TabItem label="Default Configuration">
-
-``` ts title="docs/config/head.ts"
-export function getFavIcons() {
-  return [
-    // SVG favicon for modern browsers
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        type: 'image/svg+xml',
-        href: '/Six.StarlightTheme/favicon.svg',
-      },
-    },
-    // PNG fallbacks
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '192x192',
-        href: '/Six.StarlightTheme/icon-192.png',
-      },
-    },
-    // ... more configurations
-  ] as const
-}
-```
-
-</TabItem>
-<TabItem label="Custom Theme Color">
-
-``` ts title="docs/config/head.ts"
-export function getFavIcons(themeColor = '#0E0E0E') {
-  return [
-    // ... favicon configurations
-    
-    // Custom theme color
-    {
-      tag: 'meta',
-      attrs: {
-        name: 'theme-color',
-        content: themeColor,
-      },
-    },
-  ] as const
-}
-```
-
-Then use it in your config:
-
-```ts title="docs/astro.config.ts"
-head: [
-  ...getFavIcons('#your-brand-color'),
-]
-```
-
-</TabItem>
-</Tabs>
-````
 
 # Testing Your Configuration
 
@@ -254,9 +216,10 @@ After setting up your favicons and manifest:
 
 ## Build Errors
 
-- Make sure `getFavIcons` is properly imported
+- Make sure `getFavIcons` is properly imported from `@six-tech/starlight-theme-six/utils/favicons`
 - Check for syntax errors in `astro.config.ts`
-- Ensure all file references to exist in the `public` directory
+- Ensure all file references exist in the `public` directory
+- Verify the theme package is properly installed
 
 # Browser Support
 

@@ -1,7 +1,7 @@
 {
   "name": "@six-tech/starlight-theme-six",
   "type": "module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "packageManager": "pnpm@9.14.4",
   "description": "Clean and modern Starlight theme by Six Technology",
   "author": "Six Technology",
@@ -45,6 +45,7 @@
     "./overrides/Search.astro": "./src/overrides/Search.astro",
     "./overrides/TableOfContents.astro": "./src/overrides/TableOfContents.astro",
     "./overrides/PageSidebar.astro": "./src/overrides/PageSidebar.astro",
+    "./utils/favicons": "./src/utils/favicons.ts",
     "./package.json": "./package.json"
   },
   "files": [

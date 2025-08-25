@@ -2,10 +2,10 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import starlight from '@astrojs/starlight'
 import starlightThemeSix from '@six-tech/starlight-theme-six'
-import tailwindcss from '@tailwindcss/vite'
+import { getFavIcons } from '@six-tech/starlight-theme-six/utils/favicons'
 
+import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
-import { getFavIcons } from './config/favicons'
 import { devServerFileWatcher } from './config/integrations/dev-server-file-watcher'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -29,7 +29,7 @@ export default defineConfig({
       },
       title: 'Starlight Six',
       head: [
-        ...getFavIcons(), // Inserts the favicons, apple icons and manifest.json into the <head> tag
+        ...getFavIcons({ basePath: '/Six.StarlightTheme/' }), // Inserts the favicons, apple icons and manifest.json into the <head> tag
       ],
       editLink: {
         baseUrl: 'https://github.com/six-tech/starlight-theme-six/edit/main/docs/',
