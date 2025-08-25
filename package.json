@@ -1,5 +1,5 @@
 {
-  "name": "starlight-theme-six",
+  "name": "@six-tech/starlight-theme-six",
   "type": "module",
   "version": "1.0.0",
   "packageManager": "pnpm@9.14.4",
