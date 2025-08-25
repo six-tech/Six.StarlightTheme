@@ -1,7 +1,7 @@
 {
   "name": "@six-tech/starlight-theme-six",
   "type": "module",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "packageManager": "pnpm@9.14.4",
   "description": "Clean and modern Starlight theme by Six Technology",
   "author": "Six Technology",

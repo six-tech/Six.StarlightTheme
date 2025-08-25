@@ -23,8 +23,8 @@ export default defineConfig({
     ]),
     starlight({
       logo: {
-        dark: './src/assets/six-logo-mini-mono-140-128-light.svg',
-        light: './src/assets/six-logo-mini-mono-140-128-dark.svg',
+        dark: './src/assets/six-logo-mini-gradient-140-128-light.png',
+        light: './src/assets/six-logo-mini-gradient-140-128-light.png',
         alt: 'Six Theme for Astro.js Starlight',
       },
       title: 'Starlight Six',
