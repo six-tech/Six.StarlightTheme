@@ -27,7 +27,7 @@ export default defineConfig({
         light: './src/assets/six-logo-mini-mono-140-128-dark.svg',
         alt: 'Six Theme for Astro.js Starlight',
       },
-      title: 'SIX Theme',
+      title: 'Starlight Six',
       head: [
         ...getFavIcons(), // Inserts the favicons, apple icons and manifest.json into the <head> tag
       ],

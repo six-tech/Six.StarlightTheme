@@ -4,15 +4,15 @@
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![License][license-src]][license-href]
 
-Clean and modern Starlight theme by [**Six Technology**](https://six.technology)
+![Six theme](./assets/six-starlight-banner-wide-1980-01.png 'Six - Clean and modern Starlight theme')
 
-![Six theme](./assets/six-theme.png 'Six - Clean and modern Starlight theme')
-
-## About
+Clean and modern **Astro.js Starlight** theme
 
 **Six** is a clean, modern, and highly customizable Starlight theme designed for developers and teams who want a
-professional documentation experience. Built with flexibility and performance in mind, it provides an elegant design
-that works seamlessly across all devices.
+professional documentation experience. Built with flexibility and performance in mind by [**Six Technology**](https://six.technology),
+it provides an elegant design that works seamlessly across all devices.
+
+![Six theme](./assets/six-theme.png 'Six - Clean and modern Starlight theme')
 
 ## Installation
 
@@ -79,7 +79,7 @@ that works seamlessly across all devices.
 - **HeroX**: Full-width hero sections with customizable content.
 - **GridX**: Flexible grid layouts for showcasing features (similar to, for example, Boostrap column grid).
 - **ContainerSectionX**: Container components with various layouts.
-- **FigmaX**: Embed Figma designs.
+- **FigmaX**: Embed Figma designs in the documentation page.
 - **YouTubeX**: YouTube video embeds.
 
 ## Origin

@@ -16,11 +16,14 @@ const { toc } = Astro.locals.starlightRoute
 }
 
 <script>
-  // Simple TOC highlighting implementation
+  // Fixed TOC highlighting implementation
   class SimpleStarlightTOC extends HTMLElement {
     private currentLink: HTMLAnchorElement | null = null
     private links: HTMLAnchorElement[] = []
     private headings: HTMLHeadingElement[] = []
+    private isScrolling = false
+    private scrollTimeout: number | null = null
+    private pendingUpdate: string | null = null
 
     constructor() {
       super()
@@ -38,30 +41,109 @@ const { toc } = Astro.locals.starlightRoute
 
       if (this.links.length === 0 || this.headings.length === 0) return
 
-      // Set up intersection observer
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              this.updateCurrentLink(entry.target.id)
-            }
-          })
-        },
-        {
-          rootMargin: '-20% 0px -80% 0px',
-          threshold: 0,
-        },
-      )
+      // Set up click handlers for all TOC links
+      this.setupClickHandlers()
 
-      // Observe all headings
-      this.headings.forEach((heading) => observer.observe(heading))
+      // Set up intersection observer
+      this.setupIntersectionObserver()
 
       // Set initial active link
       this.setInitialActiveLink()
 
       // Add scroll listener for better accuracy
+      this.setupScrollListener()
+    }
+
+    private setupClickHandlers() {
+      this.links.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          // Prevent default to handle smooth scrolling manually
+          e.preventDefault()
+
+          const targetId = link.hash.slice(1) // Remove the #
+          const targetElement = document.getElementById(targetId)
+
+          if (targetElement) {
+            // Clear any pending scroll updates
+            this.clearPendingUpdates()
+
+            // Smooth scroll to the target
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            })
+
+            // Temporarily disable scroll updates to prevent conflicts
+            this.isScrolling = true
+            setTimeout(() => {
+              this.isScrolling = false
+            }, 1000)
+
+            // Update the current link immediately
+            this.updateCurrentLink(targetId)
+          }
+        })
+      })
+    }
+
+    private setupIntersectionObserver() {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (this.isScrolling) return // Skip updates while programmatically scrolling
+
+          // Check if we're at the top of the page first
+          if (window.scrollY < 50) {
+            const firstHeading = this.headings[0]
+            if (firstHeading) {
+              this.updateCurrentLink(firstHeading.id)
+            }
+            return
+          }
+
+          // Find the most relevant intersecting heading
+          let bestEntry: IntersectionObserverEntry | null = null
+          let bestScore = -1
+
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Calculate a score based on intersection ratio and position
+              const score = entry.intersectionRatio + (entry.boundingClientRect.top < window.innerHeight / 2 ? 0.5 : 0)
+              if (score > bestScore) {
+                bestScore = score
+                bestEntry = entry
+              }
+            }
+          })
+
+          // Only update if we have a clear winner and no scroll is pending
+          if (bestEntry && !this.scrollTimeout) {
+            this.updateCurrentLink(bestEntry.target.id)
+          }
+        },
+        {
+          rootMargin: '-20% 0px -80% 0px',
+          threshold: [0, 0.1, 0.5, 1.0], // Multiple thresholds for better accuracy
+        },
+      )
+
+      // Observe all headings
+      this.headings.forEach((heading) => observer.observe(heading))
+    }
+
+    private setupScrollListener() {
       window.addEventListener('scroll', () => {
-        requestAnimationFrame(() => this.updateOnScroll())
+        if (this.isScrolling) return // Skip updates while programmatically scrolling
+
+        // Clear any existing timeout
+        if (this.scrollTimeout) {
+          clearTimeout(this.scrollTimeout)
+        }
+
+        // Set a new timeout to wait for scroll to settle
+        this.scrollTimeout = window.setTimeout(() => {
+          this.scrollTimeout = null
+          this.updateOnScroll()
+        }, 50) // Increased delay to wait for scroll to fully settle
       })
     }
 
@@ -76,6 +158,14 @@ const { toc } = Astro.locals.starlightRoute
       }
     }
 
+    private clearPendingUpdates() {
+      if (this.scrollTimeout) {
+        clearTimeout(this.scrollTimeout)
+        this.scrollTimeout = null
+      }
+      this.pendingUpdate = null
+    }
+
     private setInitialActiveLink() {
       if (this.links.length > 0) {
         this.currentLink = this.links[0]
@@ -86,23 +176,45 @@ const { toc } = Astro.locals.starlightRoute
     private updateOnScroll() {
       const scrollY = window.scrollY
       const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+
+      // If we're at the very top of the page, always select the first heading
+      if (scrollY < 50) {
+        const firstHeading = this.headings[0]
+        if (firstHeading) {
+          this.updateCurrentLink(firstHeading.id)
+        }
+        return
+      }
+
+      // If we're at the bottom of the page, select the last heading
+      if (scrollY + windowHeight >= documentHeight - 10) {
+        const lastHeading = this.headings[this.headings.length - 1]
+        if (lastHeading) {
+          this.updateCurrentLink(lastHeading.id)
+        }
+        return
+      }
 
       // Find the heading that's currently most visible
-      let activeHeading = this.headings[0]
-      let maxVisibility = 0
+      let activeHeading: HTMLHeadingElement | null = null
+      let bestScore = -1
 
       for (const heading of this.headings) {
         const rect = heading.getBoundingClientRect()
         const headingTop = rect.top + scrollY
         const headingBottom = headingTop + rect.height
 
-        // Calculate how much of the heading is visible
-        const visibleTop = Math.max(headingTop, scrollY)
-        const visibleBottom = Math.min(headingBottom, scrollY + windowHeight)
-        const visibility = Math.max(0, visibleBottom - visibleTop) / rect.height
+        // Calculate a score based on how centered the heading is in the viewport
+        const viewportCenter = scrollY + windowHeight / 2
+        const headingCenter = headingTop + rect.height / 2
+        const distanceFromCenter = Math.abs(viewportCenter - headingCenter)
 
-        if (visibility > maxVisibility) {
-          maxVisibility = visibility
+        // Higher score for headings closer to viewport center
+        const score = 1 / (1 + distanceFromCenter / 100)
+
+        if (score > bestScore) {
+          bestScore = score
           activeHeading = heading
         }
       }
