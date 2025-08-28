@@ -44,6 +44,15 @@ import { Steps, Tabs, TabItem } from '@astrojs/starlight/components'
 
    </Tabs>
 
+   :::note[Required Dependencies]
+   The theme requires these packages:
+   - **`@fontsource/inter` & `@fontsource/jetbrains-mono`**: For theme fonts
+   
+   These are peer dependencies, meaning you must install them explicitly in your project.
+   
+   **Image Processing**: The theme automatically configures Squoosh for reliable image processing without requiring Sharp or other native dependencies.
+   :::
+
 2. Configure the plugin in your Starlight [configuration](https://starlight.astro.build/reference/configuration/#plugins) in the `astro.config.mjs` file.
 
    :::tip[Automatic Defaults]
