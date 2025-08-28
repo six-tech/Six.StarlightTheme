@@ -21,7 +21,7 @@ import { Steps, Tabs, TabItem } from '@astrojs/starlight/components'
    <TabItem label="npm">
 
    ```sh
-   npm install @six-tech/starlight-theme-six @fontsource/inter @fontsource/jetbrains-mono
+   npm install @six-tech/starlight-theme-six @fontsource/inter @fontsource/jetbrains-mono sharp
    ```
 
    </TabItem>
@@ -29,7 +29,7 @@ import { Steps, Tabs, TabItem } from '@astrojs/starlight/components'
    <TabItem label="pnpm">
 
    ```sh
-   pnpm add @six-tech/starlight-theme-six @fontsource/inter @fontsource/jetbrains-mono
+   pnpm add @six-tech/starlight-theme-six @fontsource/inter @fontsource/jetbrains-mono sharp
    ```
 
    </TabItem>
@@ -37,7 +37,7 @@ import { Steps, Tabs, TabItem } from '@astrojs/starlight/components'
    <TabItem label="Yarn">
 
    ```sh
-   yarn add @six-tech/starlight-theme-six @fontsource/inter @fontsource/jetbrains-mono
+   yarn add @six-tech/starlight-theme-six @fontsource/inter @fontsource/jetbrains-mono sharp
    ```
 
    </TabItem>
@@ -47,10 +47,24 @@ import { Steps, Tabs, TabItem } from '@astrojs/starlight/components'
    :::note[Required Dependencies]
    The theme requires these packages:
    - **`@fontsource/inter` & `@fontsource/jetbrains-mono`**: For theme fonts
+   - **`sharp`**: For image processing (required by Astro for optimizing images)
    
    These are peer dependencies, meaning you must install them explicitly in your project.
    
-   **Image Processing**: The theme automatically configures Squoosh for reliable image processing without requiring Sharp or other native dependencies.
+   **Troubleshooting Sharp Installation:**
+   
+   If you encounter "Could not find Sharp" errors after installation, Sharp's native binaries may need to be rebuilt for your platform. Try:
+   
+   ```bash
+   # Force rebuild Sharp's native binaries
+   pnpm add sharp --force
+   # or
+   npm install sharp --force
+   # or
+   yarn add sharp --force
+   ```
+   
+   This forces Sharp to recompile its native binaries for your specific platform (Windows/macOS/Linux).
    :::
 
 2. Configure the plugin in your Starlight [configuration](https://starlight.astro.build/reference/configuration/#plugins) in the `astro.config.mjs` file.

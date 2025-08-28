@@ -19,14 +19,6 @@ export default function starlightThemeSix(userConfig: StarlightThemeSixUserConfi
   return {
     name: 'starlight-theme-six-plugin',
     hooks: {
-      'astro:config:setup': function ({ updateConfig: updateAstroConfig }: { updateConfig: (config: Record<string, any>) => void }) {
-        // Configure Squoosh as the default image service to avoid Sharp dependency issues
-        updateAstroConfig({
-          image: {
-            service: 'squoosh',
-          },
-        })
-      },
       'config:setup': function ({ config: starlightConfig, logger, updateConfig, addIntegration }) {
         const userExpressiveCodeConfig
           = starlightConfig.expressiveCode === false || starlightConfig.expressiveCode === true ? {} : starlightConfig.expressiveCode

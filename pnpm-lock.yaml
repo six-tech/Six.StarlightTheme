@@ -20,6 +20,9 @@ importers:
       marked:
         specifier: ^15.0.3
         version: 15.0.12
+      sharp:
+        specifier: '>=0.32.0 || >=0.33.0'
+        version: 0.32.6
     devDependencies:
       '@adrianub/eslint-config':
         specifier: ^0.0.4
