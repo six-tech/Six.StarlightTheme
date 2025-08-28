@@ -64,11 +64,13 @@
     "docs:build": "pnpm -C docs build"
   },
   "peerDependencies": {
-    "@astrojs/starlight": ">=0.30.0"
-  },
-  "dependencies": {
+    "@astrojs/starlight": ">=0.30.0",
     "@fontsource/inter": "^5.2.6",
     "@fontsource/jetbrains-mono": "^5.2.6"
+  },
+  "dependencies": {
+    "@pagefind/default-ui": "^1.2.0",
+    "marked": "^15.0.3"
   },
   "devDependencies": {
     "@adrianub/eslint-config": "^0.0.4",

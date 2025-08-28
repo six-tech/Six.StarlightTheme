@@ -13,6 +13,8 @@
   "dependencies": {
     "@astrojs/starlight": "^0.35.2",
     "@astrojs/starlight-tailwind": "^4.0.1",
+    "@fontsource/inter": "^5.2.6",
+    "@fontsource/jetbrains-mono": "^5.2.6",
     "@six-tech/starlight-theme-six": "workspace:*",
     "@tailwindcss/vite": "^4.1.4",
     "astro": "^5.7.5",
