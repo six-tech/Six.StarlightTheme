@@ -50,6 +50,7 @@ import { Steps, Tabs, TabItem } from '@astrojs/starlight/components'
    The Six theme automatically provides sensible defaults for:
    - **Logo**: Six theme logos (dark/light variants)
    - **Title**: "Starlight Six" 
+   - **Fonts**: Inter and JetBrains Mono (all weights included)
    - **Last Updated**: Enabled by default
    - **Table of Contents**: Shows H1-H5 headings
    
@@ -142,7 +143,10 @@ export default defineConfig({
         ...getFavIcons({ basePath: '/my-project/' }), // For subdirectory deployment
         // Or for root deployment: ...getFavIcons()
       ],
+
     }),
   ],
 })
 ```
+
+
