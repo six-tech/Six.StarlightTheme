@@ -57,7 +57,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "release": "bumpp && npm publish",
+    "release": "bumpp && pnpm publish --access public",
     "typecheck": "astro check --minimumSeverity warning --noSync && pnpm --filter docs typecheck",
     "prepare": "simple-git-hooks",
     "docs": "pnpm -C docs dev",
