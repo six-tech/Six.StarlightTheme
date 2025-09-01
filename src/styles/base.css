@@ -226,7 +226,7 @@
 
   /** Headings */
   .sl-markdown-content .sl-heading-wrapper {
-    margin: 2rem 0 0.725rem 0 !important;
+    margin: 2.5rem 0 0.725rem 0 !important;
   }
 
   .sl-markdown-content .sl-heading-wrapper:first-child {
@@ -300,6 +300,7 @@
 
   /** Tables */
   .sl-markdown-content table:not(:where(.not-content *)) {
+    display: table;
     width: 100%;
     text-indent: 0;
     border-color: inherit;
@@ -756,6 +757,11 @@
     padding-right: 0.375rem;
     border-radius: calc(var(--radius) - 2px);
     margin-left: 0.5rem;
+  }
+
+  /** Deep nesting of sidebar entries*/
+  .container-sidebar-entry > .container-group-link > .container-sidebar-entry {
+    padding-left: 1rem;
   }
 
   /** Edit page button */
