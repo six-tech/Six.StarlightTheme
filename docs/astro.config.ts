@@ -92,18 +92,6 @@ export default defineConfig({
             { slug: 'six/figma-x', badge: 'New' },
             { slug: 'six/grid-x' },
             { slug: 'six/container-section-x' },
-            {
-              label: 'Cursor',
-              items: [
-                { label: 'Cursor Rules', slug: 'six/container-section-x' },
-              ],
-            },
-            {
-              label: 'Kiro',
-              items: [
-                { label: 'Introduction', slug: 'six/container-section-x' },
-              ],
-            },
           ],
         },
       ],
