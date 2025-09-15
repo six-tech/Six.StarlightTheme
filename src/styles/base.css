@@ -224,13 +224,25 @@
     margin-top: 0;
   }
 
-  /** Headings */
-  .sl-markdown-content .sl-heading-wrapper {
-    margin: 2.5rem 0 0.725rem 0 !important;
+  .sl-markdown-content :not(h1, h2, h3, h4, h5, h6, .sl-heading-wrapper) + :is(.sl-heading-wrapper) {
+    margin-top: 0.725rem;
   }
 
+  .sl-markdown-content .sl-heading-wrapper.level-h1 {
+    margin-top: 2.5rem;
+  }
+
+  /** Headings */
+  /*.sl-markdown-content .sl-heading-wrapper {*/
+  /*    margin: 2.5rem 0 0.725rem 0 !important;*/
+  /*}*/
   .sl-markdown-content .sl-heading-wrapper:first-child {
     margin-top: 0.725rem !important;
+  }
+
+  .sl-markdown-content hr {
+    margin-top: 4rem !important;
+    margin-bottom: 2.5rem !important;
   }
 
   .sl-markdown-content .sl-heading-wrapper + hr {
@@ -719,6 +731,7 @@
     grid-auto-rows: max-content;
     grid-auto-flow: row;
     display: grid;
+    overflow: inherit !important;
   }
 
   .entry-link {

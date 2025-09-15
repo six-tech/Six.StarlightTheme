@@ -18,8 +18,6 @@ The banner feature allows you to display important announcements, notifications,
 
 # Basic Banner
 
----
-
 This page demonstrates a basic banner implementation. The banner you see at the top of this page is configured using the `banner` property in the frontmatter.
 
 ## Simple Banner
@@ -35,9 +33,9 @@ banner:
 
 The banner appears at the top of this page with the content specified in the frontmatter.
 
-# Banner Configuration
-
 ---
+
+# Banner Configuration
 
 The banner is configured through the page's frontmatter using the `banner` property.
 
@@ -50,9 +48,9 @@ The `content` property accepts HTML content, allowing you to include:
 - Links to external resources
 - Inline styling
 
-# Advanced Usage
-
 ---
+
+# Advanced Usage
 
 ## HTML Content in Banners
 
@@ -100,9 +98,9 @@ banner:
     </div>
 ```
 
-# Best Practices
-
 ---
+
+# Best Practices
 
 - Use banners for important, time-sensitive announcements
 - Keep banner content concise and actionable
@@ -111,9 +109,9 @@ banner:
 - Test banner content across different screen sizes
 - Remove or update banners when they're no longer relevant
 
-# What to Avoid
-
 ---
+
+# What to Avoid
 
 - **Don't use banners for permanent content** - Banners are best for temporary announcements
 - **Don't make banners too long** - Keep content focused and scannable

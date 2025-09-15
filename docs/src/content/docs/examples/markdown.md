@@ -21,9 +21,9 @@ Markdown doesn't use traditional props - it's a markup language with specific sy
 | Code    | `` `code` ``  | `` `inline code` ``           |
 | List    | `- item`      | `- List item`                 |
 
-# Headings
-
 ---
+
+# Headings
 
 Markdown supports six levels of headings for creating document structure.
 
@@ -55,9 +55,9 @@ Markdown supports six levels of headings for creating document structure.
 
 ###### Heading 6
 
-# Text Formatting
-
 ---
+
+# Text Formatting
 
 Markdown provides simple syntax for basic text formatting that's easy to read and write.
 
@@ -81,9 +81,9 @@ _Italic text_ provides subtle emphasis for terms or concepts.
 
 ~~Strikethrough text~~ shows deprecated or outdated information.
 
-# Lists
-
 ---
+
+# Lists
 
 ## Unordered Lists
 
@@ -139,9 +139,9 @@ _Italic text_ provides subtle emphasis for terms or concepts.
 - [ ] Task with **bold text**
 - [ ] Task with _italic text_
 
-# Links and References
-
 ---
+
+# Links and References
 
 ## Basic Links
 
@@ -177,9 +177,9 @@ _Italic text_ provides subtle emphasis for terms or concepts.
 [ref1]: https://example.com 'First reference'
 [ref2]: https://example.com 'Second reference'
 
-# Tables
-
 ---
+
+# Tables
 
 ## Basic Table
 
@@ -215,9 +215,9 @@ _Italic text_ provides subtle emphasis for terms or concepts.
 | More content |  More content  |  More content |
 | Even more    |   Even more    |     Even more |
 
-# Blockquotes
-
 ---
+
+# Blockquotes
 
 ## Basic Blockquote
 
@@ -255,9 +255,9 @@ _Italic text_ provides subtle emphasis for terms or concepts.
 >
 > — Alan Kay
 
-# Code and Technical Content
-
 ---
+
+# Code and Technical Content
 
 ## Inline Code
 
@@ -293,9 +293,9 @@ const message = greetUser('Developer')
 console.log(message)
 ```
 
-# Advanced Features
-
 ---
+
+# Advanced Features
 
 ## Horizontal Rules
 
@@ -345,9 +345,9 @@ Here's a sentence with a footnote[^1].
 \`This is not inline code\`
 \[This is not a link\]
 
-# Best Practices
-
 ---
+
+# Best Practices
 
 - Use descriptive link text instead of generic phrases
 - Keep headings logical and hierarchical
@@ -357,9 +357,9 @@ Here's a sentence with a footnote[^1].
 - Keep line length reasonable for readability
 - Test markdown rendering on different devices
 
-# What to Avoid
-
 ---
+
+# What to Avoid
 
 - **Don't use markdown for layout** - Use CSS for positioning and styling
 - **Don't create overly complex nested structures** - Keep content organized and readable
